@@ -1,0 +1,27 @@
+<main>       
+    <form class = "form_container" [formGroup]="registerForm" (ngSubmit) = "onSubmit()">
+      <h3> Register </h3>
+      <div class="container">
+          <div formGroupName = "registerFormData">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" 
+            placeholder="Enter Username"
+             formControlName="uname" 
+             required>
+            <p *ngIf = "!registerForm.get('registerFormData.uname').valid && registerForm.get('registerFormData.uname').touched">Username Required</p>
+            <label for="email"><b>Email</b></label>
+            <input type="email"
+            formControlName = "email"
+            placeholder="Enter Email"
+            required>
+            <p *ngIf = "!registerForm.get('registerFormData.email').valid && registerForm.get('registerFormData.email').touched">Email Required</p>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" formControlName="password"
+            placeholder = "Enter the Password" required>
+            <p *ngIf = "!registerForm.get('registerFormData.password').valid && registerForm.get('registerFormData.password').touched">Password Required</p> 
+            <button type="submit" [disabled] = "!registerForm.get('registerFormData.uname').valid">Register</button>
+          </div>
+      </div>
+    </form>
+</main>
+  

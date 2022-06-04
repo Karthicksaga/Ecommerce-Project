@@ -1,0 +1,20 @@
+
+
+.footer__row::after{
+    display: table;
+    clear: both;
+    content: "";
+    
+}
+.footer__column{
+   
+    float: left;
+    width: 33.33%; 
+    background-color:blue;
+}
+
+.footer__heading__3{
+
+    margin-left: 30px;
+}
+
