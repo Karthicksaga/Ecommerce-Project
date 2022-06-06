@@ -17,9 +17,10 @@ export class ProductCreationComponent implements OnInit {
       this.productForm = new FormGroup({
         "productFormData" : new FormGroup({
           "name" : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
-          "Description" : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+          "description" : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
           "price" : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
-          "imageUrl" : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)])
+          "imageUrl" : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+          "category" : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)])
         })
       })
 
@@ -29,11 +30,18 @@ export class ProductCreationComponent implements OnInit {
     console.log(this.productForm);
     const productData = {
       name : this.productForm.value.productFormData.name,
-      description : this.productForm.value.productFormData.Description,
+      description : this.productForm.value.productFormData.description,
       price : this.productForm.value.productFormData.price,
       imageUrl : this.productForm.value.productFormData.imageUrl,
+      category : this.productForm.value.productFormData.category,
     }
+
+    this.productService.addProduct(productData)
+    .subscribe((response) => {
+      console.log(response);
+    })
   }
+
 
 
 }

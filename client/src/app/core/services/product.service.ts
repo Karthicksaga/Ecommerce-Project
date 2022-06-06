@@ -19,7 +19,7 @@ export class ProductService {
 
     }
     //payload nothing but the data we send to the server
-  register(payload: object): Observable<Product> {
+  addProduct(payload: object): Observable<Product> {
     console.log(payload);
     return this.http.post<Product>(createProduct, payload);
   }

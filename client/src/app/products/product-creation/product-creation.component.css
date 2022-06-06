@@ -1,41 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+  
+.container {
+    width: 70%;
+    background: #fff;
+    box-shadow: 0 10px 15px rgba(179, 179, 179, 0.7);
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
+  
+.container h2{
+    color: #0A66C3;
+    font-size: 1.6rem;
+}
+  
+.container h2 i{
+    font-size: 1.8rem;
+    padding-left: .1rem;
+}
+  
+.text p{
+    font-size: .8rem;
+    padding-top: 0.3rem;
+}
 
-input[type=text],[type = number], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+.text h1{
+
+    text-align: center;
+    padding: 30px;
+}
+
   
-  input[type=submit] {
+.input {
+    position: relative;
     width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
+    height: 50px;
+    margin-bottom: 0.7em;
+}
+  
+.your-input input{
+    width: 100%;
+    height: 50px;
+    padding-top: 1.1rem;
+    padding-left: 9px;
+    outline: none;
+    border: 1px solid #8c8c8c;
+    border-radius: 3px;
+    transition: .2s;
+}
+  
+.your-input label {
+    position: absolute;
+    top: 30%;
+    left: 10px;
+    font-size: 1.1rem;
+    color: #8c8c8c;
+    transition: .2s;
+}
+  
+.input input:focus ~ label,
+.input input:valid ~ label{
+    top: 10%;
+    font-size: .8rem;
+    color: #000;
+}
+  
+.input input:focus {
+    border-width: 2px;
+    border-color: #0A66C3;
+}
+  
+.forgot-password-link {
+    width: 140px;
+    padding: .2rem;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bolder;
+    color: #0A66C3;
+    transition: .3s;
+    border-radius: 12px;
+}
+  
+.forgot-password-link:hover{
+    background: rgba(10, 102, 195, 0.3);
+}
+  
+button  {
+    height: 50px;
+    background: #0A66C3;
+    outline: none;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+    width : 100%;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bolder;
+}
   
-  input[type=submit]:hover {
-    background-color: #45a049;
-  }
-  textarea{
-    width: 100%;
-    height: 100px;
-    padding: 12px 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    display:inline-block;
-    resize: none;
-  }
-  div {
-    border-radius: 5px;
+.join-link {
+   text-decoration: none;
+   font-weight: bolder;
+   color: #0A66C3; 
+}
+  
+.join-now{
+    text-decoration: none;
+    font-weight: bolder;
+    color: #0A66C3; 
+    border-radius: 12px;
+    transition: .3s;
+    font-weight: bolder;
     padding: 20px;
-  }
+    border: 1px solid while;
+}
   
+.join-now:hover{
+    background: rgba(10, 102, 195, 0.3);   
+}
