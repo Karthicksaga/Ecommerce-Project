@@ -28,9 +28,11 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  
   onSubmit(){
     console.log(this.loginForm);
-    this.userService.login(this.loginForm.value)
+    let formValue = this.loginForm.value.loginFormData;
+    this.userService.login(formValue)
     .subscribe((response: any) => {
       console.log(response);
     })

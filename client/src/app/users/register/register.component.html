@@ -1,6 +1,12 @@
 <main>       
     <form class = "form_container" [formGroup]="registerForm" (ngSubmit) = "onSubmit()">
       <h3> Register </h3>
+      <div class = "error" *ngIf="registerFailure">
+        <p > {{ failedMessage }}</p>
+      </div>
+      <div class = "success" *ngIf="registerSuccess">
+        <p > Registered successfully!</p>
+      </div>
       <div class="container">
           <div formGroupName = "registerFormData">
             <label for="uname"><b>Username</b></label>
@@ -23,5 +29,9 @@
           </div>
       </div>
     </form>
+    <div class = "success" *ngIf="registerSuccess">
+      <p > Registered successfully!</p>
+    </div>
+    
 </main>
   

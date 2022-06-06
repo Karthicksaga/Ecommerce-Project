@@ -46,7 +46,13 @@ h3{
     text-align: center;
 }
 
-
+.error > p{
+  padding: 10px;
+  color: red;
+  border : 2px solid black;
+  box-shadow: 0 2px 8px white;
+  font-weight: bold;
+}
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
   span.psw {
@@ -56,4 +62,15 @@ h3{
   .cancelbtn {
      width: 100%;
   }
+}
+
+.success{
+
+  padding: 10px;
+  background-color: green;
+}
+.success > p{
+  text-align: center;
+  color: white;
+  padding: 10px;
 }

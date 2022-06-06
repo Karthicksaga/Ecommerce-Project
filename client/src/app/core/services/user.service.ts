@@ -18,12 +18,13 @@ export class UserService {
 
     }
     //payload nothing but the data we send to the server
-  register(payload: object): Observable<ServerResponse<User>> {
-    return this.http.post<ServerResponse<User>>(registerEndpoint, payload);
+  register(payload: object): Observable<User> {
+    console.log(payload);
+    return this.http.post<User>(registerEndpoint, payload);
   }
 
-  login(payload : object) : Observable<ServerResponse<User>> {
-      return this.http.post<ServerResponse<User>>(loginEndpoint, payload);
+  login(payload : object) : Observable<{email:string, password:string}> {
+      return this.http.post<{email:string, password:string}>(loginEndpoint, payload);
   }
 
 

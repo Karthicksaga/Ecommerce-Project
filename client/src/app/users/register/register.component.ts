@@ -12,9 +12,12 @@ import { UserService } from 'src/app/core/services/user.service';
 
 export class RegisterComponent implements OnInit {
 
+  registerSuccess = false;
+  registerFailure = false;
   registerForm: FormGroup;
+  failedMessage: string = "";
 
-  constructor(public userService: UserService, router: Router) {
+  constructor(public userService: UserService,private router: Router) {
 
    }
 
@@ -32,10 +35,24 @@ export class RegisterComponent implements OnInit {
   //passing the input as payload and it returns response as Observable
   //flow for the code componentts-> service-> service method-> service method returns 
   onSubmit(){
-    console.log(this.registerForm);
-    this.userService.register(this.registerForm.value)
+
+    const userData = {email : this.registerForm.value.registerFormData.email,
+                      password : this.registerForm.value.registerFormData.password, 
+                      uname : this.registerForm.value.registerFormData.uname};
+    this.userService.register(userData)
     .subscribe((response: any) => {
         console.log(response);
+        if(response.success) {
+          
+          this.registerSuccess = true;
+          this.router.navigate(['users/login']);
+        }
+        else{
+          this.registerFailure = true;
+          this.failedMessage = response.message;
+          this.registerForm.reset();
+        }
+
     });
   }
 }

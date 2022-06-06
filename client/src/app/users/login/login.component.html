@@ -1,25 +1,35 @@
-<main>       
-  <form class = "form_container" [formGroup]="loginForm" (ngSubmit)=" onSubmit()">
-    <h3> Login </h3>
-    <div class="container">
+<form [formGroup] = "loginForm" (ngSubmit) = "onSubmit()">
+  <div class="container">
+      <div class="text">
+          <h1>Sign in</h1>
+      </div>
       <div formGroupName = "loginFormData">
-        <label for="username"><b>Username</b></label>
-        <input type="text" 
-        placeholder = "username"
-        formControlName="username" 
-        required>
-        <p *ngIf = "!loginForm.get('loginFormData.username').valid && loginForm.get('loginFormData.username').touched">Username Required</p>
-        <label for="psw"><b>Password</b></label>
-        <input type="password" 
-        placeholder="Enter Password" 
-        formControlName="password" 
-        required>
-        <p *ngIf = "!loginForm.get('loginFormData.password').valid && loginForm.get('loginFormData.password').touched">Password Required</p>
-        <button type="submit">Login</button>
+          <div class="your-input">
+          <div class="input">
+              <input type="text" formControlName="username" 
+                  id="email" required />
+              <label for="email">Email</label>
+          </div>
+          <p *ngIf = "!loginForm.get('loginFormData.username').valid && loginForm.get('loginFormData.username').touched">Email Required</p>
+          <div class="input">
+              <input type="password" formControlName="password" 
+                  id="password" required />
+              <label for="password">
+                  Password
+              </label>
+          </div>
+        </div>
       </div>
-
-      </div>
-      
- 
-  </form>
-</main>
+     <!--  <a href="#" class="forgot-password-link">
+          Forgot Password?
+      </a> -->
+      <p *ngIf = "!loginForm.get('loginFormData.password').valid && loginForm.get('loginFormData.password').touched">Password Required</p>
+      <button type = "submit">Sign in</button>
+      <p class="join-link">
+          
+          <a href="#" class="join-now">
+              Register now
+          </a>
+      </p>    
+  </div>
+</form>
