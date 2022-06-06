@@ -25,7 +25,8 @@ export class RegisterComponent implements OnInit {
 
     this.registerForm = new FormGroup({
       'registerFormData': new FormGroup({
-        'uname' : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+        'name' : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+        'phone' : new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
         'email' : new FormControl(null, [Validators.required, Validators.email]),
         'password' : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)])
     })
@@ -36,9 +37,12 @@ export class RegisterComponent implements OnInit {
   //flow for the code componentts-> service-> service method-> service method returns 
   onSubmit(){
 
-    const userData = {email : this.registerForm.value.registerFormData.email,
+    const userData = {
+                      name : this.registerForm.value.registerFormData.name,
+                      phone : this.registerForm.value.registerFormData.phone,
+                      email : this.registerForm.value.registerFormData.email,
                       password : this.registerForm.value.registerFormData.password, 
-                      uname : this.registerForm.value.registerFormData.uname};
+                      };
     this.userService.register(userData)
     .subscribe((response: any) => {
         console.log(response);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductModel } from '../products.model';
+import { Product } from '../../core/model/product.model';
 
 @Component({
   selector: 'app-product-list',
@@ -9,9 +9,9 @@ import { ProductModel } from '../products.model';
 export class ProductListComponent implements OnInit {
 
   //create array of ProductList
-  products: ProductModel[] = [
-    new ProductModel(1, 'Product 1', 100, 'https://via.placeholder.com/150', 'Test Product'),
-  ]
+  // products: ProductModel[] = [
+  //   new ProductModel(1, 'Product 1', 100, 'https://via.placeholder.com/150', 'Test Product'),
+  // ]
   constructor() { }
 
   ngOnInit(): void {

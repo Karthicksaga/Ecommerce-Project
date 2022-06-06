@@ -1,28 +1,40 @@
-<html>
-    <head><title> Product Creation Page</title></head>
-    <body>
-        <div>
-            <form>
-            
-                <label for = "productId">Product Id</label>
-                <input type="text" id="pid" name="productId" placeholder="ProductId">
-                
-                <label for="pname">Product Name</label>
-                <input type="text" id="pname" name="product Name" placeholder="Product Name">
-                
-                <label for="lname">Image Url</label>
-                <input type="text" id="purl" name="imageUrl" placeholder="Image URL">
-
-                <label for = "price"> Price </label>
-                <input type = "number" name = "Productprice" placeholder = "ProductPrice"> 
-            
-                <label for = "description"> Description </label>
-                <textarea placeholder = "Description"></textarea>
-                <input type="submit" value="Add Product">
-            </form>
+<form [formGroup] = "productForm" (ngSubmit) = "onSubmitProduct()">  
+    <div class="container">
+        <div class="text">
+            <h1>Add Product</h1>
         </div>
+    <div formGroupName = "productData">
+        <div class="your-input">
+            <div class="input">
+                <input type="text" formControlName="name" 
+                    id="name" required />
+                <label for="productName">Name</label>
+            </div>
+            <div class="input">
+                <input type="text" formControlName="description" 
+                    id="decription" required />
+                <label for="decription">
+                    Description
+                </label>
+            </div>
+            <div class = "input">
+                <input type = "text" formControlName = "price" 
+                id = "price" required>
+                <label for = "price">Price</label>
+            </div>
+            <div class = "input">
+                <input type = "text" formControlName = "imageUrl"
+                id = "imageUrl" required>
+                <label for = "imageUrl"> Image Url </label>
+            </div>
 
-    </body>
-</html>
-
-
+            <div class = "input"> 
+                <input type = "text" formControlName = "category" id = "category"
+                required>
+                <label for = "category"> Category </label>
+            </div>
+        </div>
+        <button type = "submit">Add Product</button>
+    </div>
+</div>
+</form>

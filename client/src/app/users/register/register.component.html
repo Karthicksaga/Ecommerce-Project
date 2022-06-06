@@ -1,37 +1,47 @@
-<main>       
-    <form class = "form_container" [formGroup]="registerForm" (ngSubmit) = "onSubmit()">
-      <h3> Register </h3>
-      <div class = "error" *ngIf="registerFailure">
-        <p > {{ failedMessage }}</p>
+<form [formGroup] = "registerForm" (ngSubmit) = "onSubmit()">
+  <div class="container">
+      <div class="text">
+          <h1>Register</h1>
       </div>
-      <div class = "success" *ngIf="registerSuccess">
-        <p > Registered successfully!</p>
-      </div>
-      <div class="container">
-          <div formGroupName = "registerFormData">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" 
-            placeholder="Enter Username"
-             formControlName="uname" 
-             required>
-            <p *ngIf = "!registerForm.get('registerFormData.uname').valid && registerForm.get('registerFormData.uname').touched">Username Required</p>
-            <label for="email"><b>Email</b></label>
-            <input type="email"
-            formControlName = "email"
-            placeholder="Enter Email"
-            required>
-            <p *ngIf = "!registerForm.get('registerFormData.email').valid && registerForm.get('registerFormData.email').touched">Email Required</p>
-            <label for="psw"><b>Password</b></label>
-            <input type="password" formControlName="password"
-            placeholder = "Enter the Password" required>
-            <p *ngIf = "!registerForm.get('registerFormData.password').valid && registerForm.get('registerFormData.password').touched">Password Required</p> 
-            <button type="submit" [disabled] = "!registerForm.get('registerFormData.uname').valid">Register</button>
+      <div formGroupName = "registerFormData">
+          <div class="your-input">
+          <div class="input">
+              <input type="text" formControlName="name" 
+                  id="email" required />
+              <label for="email">Username</label>
           </div>
+          <p *ngIf = "!registerForm.get('registerFormData.name').valid && registerForm.get('registerFormData.uname').touched">Username Required</p>
+          <div class="input">
+            <input type="text" formControlName="phone" id="phone"
+                id="phone" required />
+            <label for="email">Mobile Number</label>
+        </div>
+        <p *ngIf = "!registerForm.get('registerFormData.phone').valid && registerForm.get('registerFormData.phone').touched">Mobile Number Required</p>
+          <div class="input">
+              <input type="email" formControlName="email" 
+                  id="email" required />
+              <label for="email">
+                  Email
+              </label>
+          </div>
+          <p *ngIf = "!registerForm.get('registerFormData.email').valid && registerForm.get('registerFormData.email').touched">Email Required</p>
+          <div class="input">
+              <input type="password" formControlName="password" 
+                  id="password" required />
+              <label for="password">
+                  Password
+              </label>
+          </div>
+          <p *ngIf = "!registerForm.get('registerFormData.password').valid && registerForm.get('registerFormData.password').touched">Password Required</p>
+        </div>
       </div>
-    </form>
-    <div class = "success" *ngIf="registerSuccess">
+     <!--  <a href="#" class="forgot-password-link">
+          Forgot Password?
+      </a> -->
+      <button type = "submit">Register</button>
+   
+  </div>
+  <div class = "success" *ngIf="registerSuccess">
       <p > Registered successfully!</p>
     </div>
-    
-</main>
-  
+</form>

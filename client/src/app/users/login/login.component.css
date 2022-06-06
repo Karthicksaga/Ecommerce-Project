@@ -120,6 +120,9 @@ button :hover {
     padding: 20px;
     border: 1px solid while;
 }
+.text h1{
+  text-align: center;
+}
   
 .join-now:hover{
     background: rgba(10, 102, 195, 0.3);   

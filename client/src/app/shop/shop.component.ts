@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductModel } from '../products/products.model';
+import { Product } from '../core/model/product.model';
 
 @Component({
   selector: 'app-shop',
@@ -8,8 +8,8 @@ import { ProductModel } from '../products/products.model';
 })
 export class ShopComponent implements OnInit {
 
-  products: ProductModel[]  = [new ProductModel(1, "Book", 80, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb_1V66OBAOa9ajifl02qesb3VT2NwVKvmrijAamaYUAtueSfjQeyPGHXefZcewOROGeM&usqp=CAU", "Test Product"),
-  new ProductModel(1, "Book", 80, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb_1V66OBAOa9ajifl02qesb3VT2NwVKvmrijAamaYUAtueSfjQeyPGHXefZcewOROGeM&usqp=CAU", "Test Product")];
+  // products: ProductModel[]  = [new Product(1, "Book", 80, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb_1V66OBAOa9ajifl02qesb3VT2NwVKvmrijAamaYUAtueSfjQeyPGHXefZcewOROGeM&usqp=CAU", "Test Product"),
+  // new ProductModel(1, "Book", 80, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb_1V66OBAOa9ajifl02qesb3VT2NwVKvmrijAamaYUAtueSfjQeyPGHXefZcewOROGeM&usqp=CAU", "Test Product")];
   constructor() { }
 
   ngOnInit(): void {

@@ -1,9 +1,12 @@
 .topnav {
     overflow: hidden;
-    background-color: #313532;
+    background: blue;
+    color : black;
+    box-shadow: 0 2px 8px white;
+    font-family: 'Roboto', sans-serif;
   }
   
-  .topnav>a {
+  .topnav >a {
     float: left;
     display: block;
     color: #FFF;

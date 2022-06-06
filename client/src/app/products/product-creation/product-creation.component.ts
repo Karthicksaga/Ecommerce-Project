@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import { ProductService } from "../../core/services/product.service";
 
 @Component({
   selector: 'app-product-creation',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductCreationComponent implements OnInit {
 
-  constructor() { }
+  constructor( private productService: ProductService) { }
+  productForm : FormGroup;
 
   ngOnInit(): void {
+
+      this.productForm = new FormGroup({
+        "productFormData" : new FormGroup({
+          "name" : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+          "Description" : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+          "price" : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)]),
+          "imageUrl" : new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(16)])
+        })
+      })
+
   }
+
+  onSubmitProduct(){
+    console.log(this.productForm);
+    const productData = {
+      name : this.productForm.value.productFormData.name,
+      description : this.productForm.value.productFormData.Description,
+      price : this.productForm.value.productFormData.price,
+      imageUrl : this.productForm.value.productFormData.imageUrl,
+    }
+  }
+
 
 }
