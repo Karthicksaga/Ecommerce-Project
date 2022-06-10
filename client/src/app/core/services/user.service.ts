@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { User } from  '../model/user.model';
 import { ServerResponse } from '../model/serverResponse.model';
 const baseUrl = 'http://localhost:3000/api/users';
-const registerEndpoint = baseUrl + '/register';
+const registerEndpoint = baseUrl + '/customerRegistration';
 const loginEndpoint = baseUrl + '/login';
 
 
@@ -26,6 +26,7 @@ export class UserService {
   login(payload : object) : Observable<{email:string, password:string}> {
       return this.http.post<{email:string, password:string}>(loginEndpoint, payload);
   }
+  
 
 
   

@@ -1,162 +1,128 @@
-const mongodb = require('mongodb');
-const getDb = require('../util/database').getDb;
+const mongoose = require('mongoose');
+const validator = require('validator');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-
-class User {
-  constructor(email, password, username) {
-    this.email = email;
-    this.password = password;
-    this.username = username;
-  }
-
-  fetchAllUserEmail(){
-    const db = getDb();
-    return db
-      .collection('users')
-      .find({},{"email" : 1})
-      .toArray()
-  }
-  registerUser() {
-
-    let data = false;
-    const db = getDb();
-    db.collection('users').find({},{"email" : 1})
-    .toArray()
-    .then(users => {
-      console.log(users);
-      for (let i = 0; i < users.length; i++) {
-        if (users[i].email === this.email) {
-          return true;
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    phone: {
+        type: Number,
+        required: true,
+        unique: true,
+        validate(value) {
+            if (Number.isNaN(value)) {
+                throw new Error('Phone Number is invalid');
+            }
         }
-      }
-      return false
-    }).then( result => {
-      console.log("Storage Block called ");
-      console.log(result);
-      if (data === false) {
-        db.collection('users').insertOne(this);
-        return true;
-      }
-      else{
-        return false;
-      }
-    })
-    .catch(err => {})
-  }
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        lowercase: true,
+        validate(value) {
+            if (!validator.isEmail(value)) {
+                throw new Error('Email is invalid');
+            }
+        }
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 7,
+        trim: true,
+        validate(value) {
+            if (value.toLowerCase().includes('password')) {
+                throw new Error('Password cannot contain "password"');
+            }
+        }
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    status: {
+        type: String,
+        required: true,
+        lowercase: true,
+        default: 'active',
+        enum: ['active', 'terminated']
+    },
+    tokens: [{
+        token: {
+            type: String,
+            required: true
+        }
+    }]
+}, {
+    timestamps: true
+})
 
-  loginByEmail(email) {
-    const db = getDb();
-    return db
-      .collection('users')
-      .findOne({ email: email })
-  }
-  addToCart(product) {
-    const cartProductIndex = this.cart.items.findIndex(cp => {
-      return cp.productId.toString() === product._id.toString();
-    });
-    let newQuantity = 1;
-    const updatedCartItems = [...this.cart.items];
+userSchema.virtual('seller', {
+    ref: 'Seller',
+    localField: '_id',
+    foreignField: 'user'
+})
 
-    if (cartProductIndex >= 0) {
-      newQuantity = this.cart.items[cartProductIndex].quantity + 1;
-      updatedCartItems[cartProductIndex].quantity = newQuantity;
-    } else {
-      updatedCartItems.push({
-        productId: new ObjectId(product._id),
-        quantity: newQuantity
-      });
-    }
-    const updatedCart = {
-      items: updatedCartItems
-    };
-    const db = getDb();
-    return db
-      .collection('users')
-      .updateOne(
-        { _id: new ObjectId(this._id) },
-        { $set: { cart: updatedCart } }
-      );
-  }
+userSchema.methods.toJSON = function () {
+    const user = this;
+    const userObject = user.toObject();
 
-  getCart() {
-    const db = getDb();
-    const productIds = this.cart.items.map(i => {
-      return i.productId;
-    });
-    return db
-      .collection('products')
-      .find({ _id: { $in: productIds } })
-      .toArray()
-      .then(products => {
-        return products.map(p => {
-          return {
-            ...p,
-            quantity: this.cart.items.find(i => {
-              return i.productId.toString() === p._id.toString();
-            }).quantity
-          };
-        });
-      });
-  }
+    delete userObject.password;
+    delete userObject.tokens;
+    delete userObject.__v;
 
-  deleteItemFromCart(productId) {
-    const updatedCartItems = this.cart.items.filter(item => {
-      return item.productId.toString() !== productId.toString();
-    });
-    const db = getDb();
-    return db
-      .collection('users')
-      .updateOne(
-        { _id: new ObjectId(this._id) },
-        { $set: { cart: { items: updatedCartItems } } }
-      );
-  }
-
-  addOrder() {
-    const db = getDb();
-    return this.getCart()
-      .then(products => {
-        const order = {
-          items: products,
-          user: {
-            _id: new ObjectId(this._id),
-            name: this.name
-          }
-        };
-        return db.collection('orders').insertOne(order);
-      })
-      .then(result => {
-        this.cart = { items: [] };
-        return db
-          .collection('users')
-          .updateOne(
-            { _id: new ObjectId(this._id) },
-            { $set: { cart: { items: [] } } }
-          );
-      });
-  }
-
-  getOrders() {
-    const db = getDb();
-    return db
-      .collection('orders')
-      .find({ 'user._id': new ObjectId(this._id) })
-      .toArray();
-  }
-
-  static findById(userId) {
-    const db = getDb();
-    return db
-      .collection('users')
-      .findOne({ _id: new ObjectId(userId) })
-      .then(user => {
-        console.log(user);
-        return user;
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+    return userObject;
 }
+
+userSchema.methods.generateAuthToken = async function () {
+    const user = this
+    const token = jwt.sign({ _id: user._id.toString() }, 'thisismynewcourse')
+
+    user.tokens = user.tokens.concat({ token })
+    await user.save();
+
+    return token;
+}
+
+userSchema.statics.findByCredentials = async (email, password) => {
+    const user = await User.findOne({ email })
+    if (!user) {
+        throw false;
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+        return false;
+    }
+
+    return user;
+}
+
+// Hash the plain text password before saving
+userSchema.pre('save', async function (next) {
+    const user = this;
+
+    if (user.isModified('password')) {
+        user.password = await bcrypt.hash(user.password, 8);
+    }
+
+    next();
+});
+
+// Delete user transactions when user is removed
+userSchema.pre('remove', async function (next) {
+    const user = this;
+    await Transaction.deleteMany({ owner: user._id });
+    next();
+});
+
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

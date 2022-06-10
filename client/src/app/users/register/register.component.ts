@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   registerFailure = false;
   registerForm: FormGroup;
   failedMessage: string = "";
+  isAdmin = false
 
   constructor(public userService: UserService,private router: Router) {
 
@@ -39,9 +40,10 @@ export class RegisterComponent implements OnInit {
 
     const userData = {
                       name : this.registerForm.value.registerFormData.name,
-                      phone : this.registerForm.value.registerFormData.phone,
+                      phone : Number(this.registerForm.value.registerFormData.phone),
                       email : this.registerForm.value.registerFormData.email,
-                      password : this.registerForm.value.registerFormData.password, 
+                      password : Number(this.registerForm.value.registerFormData.password), 
+                      isAdmin : this.isAdmin
                       };
     this.userService.register(userData)
     .subscribe((response: any) => {

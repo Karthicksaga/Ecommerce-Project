@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const db = 'e-commerce';
-const connectionURL = 'mongodb+srv://karthicktj:NbaU9DJ6E0mtBlBL@cluster0.gdjet.mongodb.net/?retryWrites=true&w=majority'
+const connectionURL = `mongodb+srv://karthicktj:NbaU9DJ6E0mtBlBL@cluster0.gdjet.mongodb.net/${db}?retryWrites=true&w=majority`
 
 mongoose.connect(connectionURL, 
     {
@@ -11,4 +11,3 @@ mongoose.connect(connectionURL,
     }
     ).then(console.log(`Connected to ${db} db Successfully..`))
     .catch(error => console.log(error));
-

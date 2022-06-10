@@ -13,7 +13,7 @@ APIENDPOINT : '/seller'
 */
 
 
-exports.addSeller = async(req,res) => {
+exports.addSellerDetails = async(req,res) => {
     const user = req.user;
     if(user.isAdmin === false) {
         return res.status(400).json({
@@ -53,7 +53,7 @@ Method : GET
 */
 
 
-exports.getSellerData = async (req, res) => {
+exports.getSellerDetail = async (req, res) => {
 
     const user = req.user;
 
@@ -80,46 +80,6 @@ exports.getSellerData = async (req, res) => {
         });
     }
 }
-router.get('/seller', auth, async (req, res) => {
-    const user = req.user;
-    
-    if(user.isAdmin === false) {
-        return res.status(400).send({
-            Message: 'Your not allowed'
-        });
-    }
-
-    const _id = req.body.id;
-
-    try {
-        const seller = await Seller.findOne({
-            _id,
-            admin: req.user._id
-        });
-
-        if (!seller) {
-            return res.status(404).json({
-                message: 'Seller not found',
-                success : false
-            });
-        }
-
-        res.status(200).json({
-            message : "Seller Fetched Successfully",
-            data : seller,
-            success : true
-        });
-    } catch (e) {
-        if(e.code == '11000') {
-            return res.status(400).send({
-                message: 'Already Registered'
-            })
-        }
-        
-    }
-})
-
-
 
 /*
     Get all Seller  details

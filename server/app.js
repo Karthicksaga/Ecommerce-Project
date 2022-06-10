@@ -1,17 +1,15 @@
 const path = require('path');
-
 const express = require('express');
+require('./util/database');
 const bodyParser = require('body-parser');
-
-const errorController = require('./controllers/error');
-const mongoConnect = require('./util/database').mongoConnect;
-const User = require('./models/user');
-
+const mongoose = require('mongoose');
 const app = express();
 
 // const adminRoutes = require('./routes/admin');
 // const shopRoutes = require('./routes/shop');
 const userRoutes = require('./routes/user')
+
+const environmentConstant = require('./util/environment');
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -23,6 +21,7 @@ allowCrossDomain = (req, res, next) => {
   next();
 }
 
+//middle ware 
 app.use(allowCrossDomain);
 
 // app.use((req, res, next) => {
@@ -38,10 +37,7 @@ app.use('/api/users', userRoutes);
 //app.use('/admin', adminRoutes);
 
 
-app.use(errorController.get404);
+app.listen(environmentConstant.PORT, ()=>{
+  console.log(`Server is running on port ${environmentConstant.PORT}`);
+})
 
-mongoConnect(() => {
-  app.listen(3000, ()=>{
-    console.log("Server Listening on Port number " + 3000);
-  });
-});
