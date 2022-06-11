@@ -6,11 +6,11 @@
       <div formGroupName = "loginFormData">
           <div class="your-input">
           <div class="input">
-              <input type="text" formControlName="username" 
+              <input type="text" formControlName="email" 
                   id="email" required />
               <label for="email">Email</label>
           </div>
-          <p *ngIf = "!loginForm.get('loginFormData.username').valid && loginForm.get('loginFormData.username').touched">Email Required</p>
+          <p *ngIf = "!loginForm.get('loginFormData.email').valid && loginForm.get('loginFormData.email').touched">Email Required</p>
           <div class="input">
               <input type="password" formControlName="password" 
                   id="password" required />
@@ -33,3 +33,7 @@
       </p>    
   </div>
 </form>
+
+<div *ngIf="error" class="offset-md-3 col-md-6 alert alert-danger row justify-content-center" role="alert">
+    {{ error }}
+  </div>

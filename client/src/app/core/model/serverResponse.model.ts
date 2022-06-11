@@ -1,7 +1,8 @@
-export class ServerResponse<T> {
+export class ServerResponse {
     constructor(
       public message: string,
-      public data?: T
+      public data?: any,
+      public success?: boolean
     ) { }
   }
   

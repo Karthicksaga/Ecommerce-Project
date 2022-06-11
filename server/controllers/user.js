@@ -94,19 +94,21 @@ exports.loginCustomer = async(req,res) => {
             const token = await user.generateAuthToken();
             
             return res.status(201).json({
-                success: true,
-                message: 'Login Successful',
+                
                 data: {
                     token: token, 
                     "userName" : user.name,
-                    isAdmin : user.isAdmin
+                    isAdmin : user.isAdmin,
+                    success: true,
+                    message: 'Login Successful',
                 }
             });
         }catch(e){
-            console.log(e);
             res.status(404).json({
-                success: false,
-                message: e.message
+                data:{
+                    success: false,
+                    message:"NOT FOUND"
+                }
             })
         }
 }

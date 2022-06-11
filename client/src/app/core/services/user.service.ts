@@ -23,8 +23,8 @@ export class UserService {
     return this.http.post<User>(registerEndpoint, payload);
   }
 
-  login(payload : object) : Observable<{email:string, password:string}> {
-      return this.http.post<{email:string, password:string}>(loginEndpoint, payload);
+  login(payload : object) : Observable<ServerResponse> {
+      return this.http.post<ServerResponse>(loginEndpoint, payload);
   }
   
 
