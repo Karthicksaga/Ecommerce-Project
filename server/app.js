@@ -1,3 +1,5 @@
+//eccommerse database design reference : https://fabric.inc/blog/ecommerce-database-design-example/
+
 const path = require('path');
 const express = require('express');
 require('./util/database');
@@ -8,6 +10,9 @@ const app = express();
 // const adminRoutes = require('./routes/admin');
 // const shopRoutes = require('./routes/shop');
 const userRoutes = require('./routes/user')
+const categoryRoutes = require('./routes/categoryRouter');
+const productsRoutes = require('./routes/productRouter');
+const cartRoutes = require('./routes/cartRouter');
 
 const environmentConstant = require('./util/environment');
 
@@ -34,6 +39,12 @@ app.use(allowCrossDomain);
 // });
 
 app.use('/api/users', userRoutes);
+
+app.use('/api/category', categoryRoutes);
+
+app.use('/product', productsRoutes);
+
+app.use('/cart', cartRoutes)
 //app.use('/admin', adminRoutes);
 
 

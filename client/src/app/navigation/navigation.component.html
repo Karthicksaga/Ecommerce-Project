@@ -6,18 +6,24 @@
       <a routerLink="/user/purchaseHistory">My Purchase History</a>
       <a *ngIf="isUserAdmin()" routerLink="/book/create">Create Book</a>
     </ng-template> -->
+    <ng-template [ngIf]="userLoginStatus()">
+      <a  *ngIf="!isAdminUser()" routerLink = "/admin/add-product">New Product</a>
+    </ng-template>
     
-    <a  *ngIf = "isUserLoggedIn()" routerLink = "/admin/add-product">New Product</a>
     <div>
-      <ng-template ngIf="userLoginStatus()">
+      <ng-template [ngIf]="!userLoginStatus()">
         <a class = "menu-item-right" routerLink = "/users/register">Register</a>
         <a class="menu-item-right" routerLink="/users/login">Login</a>
       </ng-template>
-      <ng-template [ngIf] = "userLoginStatus()">
+      <ng-template [ngIf]="userLoginStatus()">
         <a class="menu-item-right" routerLink="/home" (click)="logout()">
-          {{getUsername()}}
-          <span>Hello, {{username}}</span> Logout
+          {{getUserName()}}
+          <span>{{username}}</span> Logout
         </a>
+        <a class = "menu-item-right" routerLink="/user/profile/mine">My Profile</a>
+        <a class = "menu-item-right" *ngIf="isAdminUser()" routerLink = "/cart">Cart</a>
+      <a class = "menu-item-right" *ngIf="isAdminUser() "routerLink="/user/order">Order</a>
+
       </ng-template>
       
       <!-- <ng-template [ngIf]="!isUserLogged()">

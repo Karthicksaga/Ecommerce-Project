@@ -1,45 +1,43 @@
 const mongoose = require('mongoose');
 
+//name, description, imageURl,category,quantity,price,quantity
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     description: {
         type: String,
         required: true,
         trim: true
     },
-    starValue: {
+    imageUrl: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    categoryId: {
         type: Number,
-        default: 0,
-        required: true,
+        required: true
     },
-    category: {
-        type: String,
-        required: true,
-        lowercase: true,
-        enum: ['grocery', 'mobile']
+    price:{
+        type: Number,
+        required: true
     },
-    status: {
-        type: String,
-        required: true,
-        lowercase: true,
-        enum: ['active', 'terminated']
+    quantity: {
+        type : Number,
+        required: true
     },
-    seller: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Seller'
+    createdAt: {
+        type: Date,
+        default: Date.now
     },
-    admin: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User'
+    updatedAt:{
+        type: Date,
+        default: Date.now
     }
-}, {
-    timestamps: true
 });
 
 const Product = mongoose.model('Product', productSchema);

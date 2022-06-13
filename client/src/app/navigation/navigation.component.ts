@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CommonService } from 'src/app/core/services/common.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-navigation',
@@ -9,7 +10,7 @@ import { CommonService } from 'src/app/core/services/common.service';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(private commonService: CommonService) { }
+  constructor(private commonService: CommonService, private http: HttpClient) { }
 
   isLoggedUser: Subscription;
   userNameSubscription: Subscription;
@@ -35,16 +36,27 @@ export class NavigationComponent implements OnInit {
     })
   }
 
-  isUserLoggedIn(){
+  isAdminUser(){
     return this.isUser;
   }
 
   public getUserName(){
     console.log(this.userName);
+    console.log("Username Function is Called ");
     return this.userName;
   }
 
   public userLoginStatus(){
     return this.userStatus;
+  }
+
+
+  public logout(){
+
+    this.userName = undefined;
+    this.userStatus = undefined;
+    this.commonService.clearSessionToken();
+    this.commonService.clearUserName();
+    this.commonService.clearUserLoginStatus();
   }
 }

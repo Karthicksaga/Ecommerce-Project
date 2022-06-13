@@ -57,5 +57,9 @@ export class CommonService {
     public setToken(token:string){
         localStorage.setItem('token',token);
     }
+
+    public clearSessionToken(){
+        localStorage.removeItem('token');
+    }
 }
 
