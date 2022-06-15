@@ -3,10 +3,10 @@ const Product = require('../models/product');
 const mongoose = require('mongoose');
 const ResponseClass = require('../util/response');
 
-exports.addToCart =async (req,res,next) => {
+exports.addToCart = async (req,res,next) => {
 
         const requestBody = req.body;
-
+        
         if(requestBody != null){
 
             const userId = requestBody.userId;
@@ -98,7 +98,7 @@ exports.addToCart =async (req,res,next) => {
                                             productId : productId,
                                             quantity : quantity,
                                             name : product.name,
-                                            price : product.price
+                                            price : product.price * quantity
                                         }],
                                         modifiedOn : Date.now()
                                     })
@@ -208,3 +208,50 @@ exports.getCartDetails = async (req,res,next) => {
         }
     }
 }
+
+exports.deleteCartDetails = async(req, res, next) => {
+    console.log("Delete cart details controller function started executing ");
+    const requestBody = req.body;
+    if(requestBody != null){
+        const userId = requestBody.userId;
+        try{
+            const filterByUserId = { userId : userId };
+            const cart = await Cart.deleteOne(filterByUserId);
+            if(cart != null){
+                const responseClass = new ResponseClass(false,cart,"cart details deleted successfully");
+                res.status(200).json({
+                    response : responseClass.getResponse()
+                });
+            }else{
+                const responseClass = new ResponseClass(false,null,"cart details not found");
+                res.status(400).json({
+                    response : responseClass.getResponse()
+                });
+            }
+        }catch(err){
+            const responseClass = new ResponseClass(false,null, "Error while deleting the cart details");
+            res.status(500).json({
+                response: responseClass.getResponse()
+            })
+        }
+    }else{
+        const responseClass = new ResponseClass(false,null, "request body is empty");
+        res.status(400).json({
+            response: responseClass.getResponse()
+        })
+    }
+}
+
+
+// exports.updateCartDetails = async (req,res, next) => {
+//     console.log("Update cart details controller function started executing ");
+//     const requestBody = req.body;
+//     if(requestBody != null){
+
+//     }else{
+//         const responseClass = new ResponseClass(false,null, "request body is empty");
+//         res.status(400).json({
+//             response: responseClass.getResponse()
+//         })
+//     }
+// }

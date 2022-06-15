@@ -25,6 +25,9 @@ import { FormsModule } from '@angular/forms';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './core/services/user.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Product1Component } from './products/product1/product1.component';
+import { Product2Component } from './products/product2/product2.component';
+import { Product3Component } from './products/product3/product3.component';
 
 
 //we define all the routes in the main page of the application
@@ -64,7 +67,10 @@ const appRoutes: Routes = [
     LoginComponent,
     ProfileComponent,
     ReciptsComponent,
-    RegisterComponent
+    RegisterComponent,
+    Product1Component,
+    Product2Component,
+    Product3Component
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ const userRoutes = require('./routes/user')
 const categoryRoutes = require('./routes/categoryRouter');
 const productsRoutes = require('./routes/productRouter');
 const cartRoutes = require('./routes/cartRouter');
+const orderRoutes = require('./routes/orderRoutes');
 
 const environmentConstant = require('./util/environment');
 
@@ -45,6 +46,8 @@ app.use('/api/category', categoryRoutes);
 app.use('/product', productsRoutes);
 
 app.use('/cart', cartRoutes)
+
+app.use('/order', orderRoutes);
 //app.use('/admin', adminRoutes);
 
 
