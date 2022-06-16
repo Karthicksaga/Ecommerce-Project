@@ -7,9 +7,9 @@ const userController = require('../controllers/user');
 const router = express.Router();
 
 // /admin/add-product => GET
-router.post('/adminRegistration', userController.adminRegistration);
+router.post('/adminRegistration' ,userController.adminRegistration);
 
-router.post('/customerRegistration' ,userController.userRegistration);
+router.post('/customerRegistration', userController.userRegistration);
 
 router.post('/login', userController.loginCustomer);
 

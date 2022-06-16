@@ -1,5 +1,6 @@
 const express = require('express');
 const Category = require('../models/category')
+const mongoose = require('mongoose');
 
 
 
@@ -126,14 +127,16 @@ exports.getCategory =async (req, res,next) => {
         })
     } 
 
-
+}
 exports.getCategoryById = async (req, res, next) => {
 
-    const categoryId = req.body.categoryId
+    const categoryId = req.params.categoryId;
+    
     if(categoryId != null){
 
+        console.log(typeof categoryId);
         const category = await Category.find({
-            categoryId: categoryId
+            _id: mongoose.Types.ObjectId(categoryId)
         })
         if(category.length !== 0){
             res.status(200).json({
@@ -161,5 +164,4 @@ exports.getCategoryById = async (req, res, next) => {
             }
         })
     }
-}
 }

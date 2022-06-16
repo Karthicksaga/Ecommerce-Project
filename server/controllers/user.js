@@ -38,9 +38,9 @@ exports.adminRegistration = async (req, res) => {
 
 //customer registration
 
-exports.userRegistration = async(req, res) => {
+exports.userRegistration = async(req, res,next) => {
 
-   
+    console.log("User Registration Api Called Successfully");
     try {
         const user = new User({
             name : req.body.name,
@@ -49,6 +49,7 @@ exports.userRegistration = async(req, res) => {
             password : req.body.password
         });
 
+    
         console.log(user);
         if(user){
             console.log("if block is calling");

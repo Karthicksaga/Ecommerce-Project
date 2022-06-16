@@ -9,11 +9,12 @@ const app = express();
 
 // const adminRoutes = require('./routes/admin');
 // const shopRoutes = require('./routes/shop');
-const userRoutes = require('./routes/user')
+
 const categoryRoutes = require('./routes/categoryRouter');
 const productsRoutes = require('./routes/productRouter');
 const cartRoutes = require('./routes/cartRouter');
 const orderRoutes = require('./routes/orderRoutes');
+const userRoutes = require('./routes/userRouter');
 
 const environmentConstant = require('./util/environment');
 

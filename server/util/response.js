@@ -1,4 +1,4 @@
-class Response {
+class ResponseClass {
     
     constructor(status, data, message) {
         this.status = status;
