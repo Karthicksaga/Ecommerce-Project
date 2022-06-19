@@ -87,16 +87,17 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/app/header-component/assets"
             ],
             "styles": [
               "src/styles.css",
-              "../node_modules/sweetalert2/dist/sweetalert2.css"
-              
-
+              "../node_modules/sweetalert2/dist/sweetalert2.css",
+              "../node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "../node_modules/sweetalert2/dist/sweetalert2.js"
+              "../node_modules/sweetalert2/dist/sweetalert2.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           }
         }

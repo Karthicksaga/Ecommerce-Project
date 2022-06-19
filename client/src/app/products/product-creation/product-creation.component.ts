@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { ProductService } from "../../core/services/product.service";
+import { CategoryService } from "../../core/services/category.service";
 import swal from 'sweetalert2';
 
 @Component({
@@ -8,9 +9,15 @@ import swal from 'sweetalert2';
   templateUrl: './product-creation.component.html',
   styleUrls: ['./product-creation.component.css']
 })
+
+//Form Dropdown Creation Example 
+//https://stackoverflow.com/questions/42908475/how-to-populate-a-dropdown-list-default-value-from-api-in-angular2-model-based-f
 export class ProductCreationComponent implements OnInit {
 
-  constructor( private productService: ProductService) { }
+  categoryId = '';
+  categoryList = [];
+  constructor( private productService: ProductService,
+                private categoryService : CategoryService) { }
   productForm : FormGroup;
 
   ngOnInit(): void {
@@ -26,6 +33,7 @@ export class ProductCreationComponent implements OnInit {
         })
       })
 
+      this.getCategories();
   }
 
   onSubmitProduct(){
@@ -55,5 +63,34 @@ export class ProductCreationComponent implements OnInit {
       })
     }
   })
+  }
+
+  getCategories(){
+
+    this.categoryService.getAllCategory().subscribe((response) => {
+      console.log("Server Response :" + response);
+      const serverResponse = response['response']
+
+      if(serverResponse['success'] === true){
+        this.categoryList = serverResponse['data']
+        console.log(this.categoryList);
+        this.categoryId = this.categoryList[0].categoryId
+
+        swal.fire({
+          title: 'Success',
+          text:serverResponse['message'],
+          icon : "success",
+          timer : 200
+        })
+      }else{
+        swal.fire({
+          title: 'Error',
+          text:serverResponse['message'],
+          icon : "error",
+        });
+      }
+    })
+    
+
   }
 }

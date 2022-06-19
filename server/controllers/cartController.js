@@ -58,7 +58,7 @@ exports.addToCart = async (req,res,next) => {
                     console.log("Product found");
                     //check if the product quantity is present 
                     const product = products[0];
-                    console.log("Products Printted" +product);
+                    console.log("Products :" +product);
                     if(product.quantity > 0){
                         const productQuantity = product.quantity
                         if(quantity <= productQuantity){
@@ -118,7 +118,7 @@ exports.addToCart = async (req,res,next) => {
 
                                         //update the quantity
                                         try{
-                                            const updateCart = await Cart.updateOne(filterByUserId,updateCart);
+                                            const updateCart = await Cart.updateOne(filterByUserId,updateProductCart);
                                             console.log("Product updated successfully in the cart");
                                             if(updateCart != null){
                                                 const responseClass = new ResponseClass(false,null,"quantity updated in the cart Successfully");
@@ -138,7 +138,7 @@ exports.addToCart = async (req,res,next) => {
 
                                         //add the product to the cart product List  and update it
 
-                                        const addNewProductExistingCart = {
+                                        const addNewProductIntoExistingCart = {
                                                 productId : productId,
                                                 quantity : quantity,
                                                 name : product.name,
@@ -147,7 +147,7 @@ exports.addToCart = async (req,res,next) => {
                                         }
 
                                         //push into the cart product List 
-                                        cartProducts.push(addNewProductExistingCart);
+                                        cartProducts.push(addNewProductIntoExistingCart);
                                         //update the cart
                                         const updateProductCart = { products : cartProducts };
                                         console.log(updateProductCart);

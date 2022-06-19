@@ -27,7 +27,17 @@
                 id = "imageUrl" required>
                 <label for = "imageUrl"> Image Url </label>
             </div>
-
+            <div class = "input">
+                <select class="form-control">
+                    <option *ngFor="let category of categoryList" [value]="category.categoryId">{{category.categoryName}}</option>
+                </select>
+            </div>
+            <div class="input" >
+                <select class="form-control" formControlName="categoryId"> 
+                    <option *ngFor="let category of categoryList" [selected]="1 == category.categoryId" >{{category.categoryName}}</option>
+                </select>
+                <label>Categories</label>
+            </div>
             <div class = "input"> 
                 <input type = "text" formControlName = "category" id = "category"
                 required>

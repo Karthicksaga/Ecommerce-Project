@@ -103,7 +103,7 @@ exports.addProduct = async(req,res,next) => {
 
 //get all products  
 exports.getAllProducts = async(req,res,next) => {
-    
+        console.log("All Product Controller Server Part Called ");
         try{
             const products = await Product.find();
             if(products.length > 0){
@@ -122,6 +122,7 @@ exports.getAllProducts = async(req,res,next) => {
                         data: null
                     }
                 })
+                
             }
         }catch(err){
             res.status(500).json({
@@ -294,13 +295,15 @@ exports.getAllProducts = async(req,res,next) => {
 
     exports.deleteProduct = async(req,res,next) => {
         const productId = req.params.productId;
+        
+        console.log("delete Product Function called");
         if(productId != null){
 
             try{
-
                 const deletedProduct = await Product.deleteOne({
                     _id: productId
                 });
+                console.log(deletedProduct);
                 res.status(204).json({
                     response: {
                         success: true,
@@ -358,3 +361,49 @@ exports.getAllProducts = async(req,res,next) => {
         }
     }
     
+
+    exports.getProductsByCategory = async(req,res,next) => {
+        const categoryId = req.params.categoryId;
+        if(categoryId != null){
+            try{
+                const products = await Product.find({
+                    categoryId: categoryId
+                })
+                if(products.length > 0){
+
+                    console.log("Got the Product from Database");
+                    res.status(200).json({
+                        response: {
+                            success: true,
+                            message: "Products found",
+                            data: products
+                        }
+                    })
+                }else{
+                    res.status(404).json({
+                        response: {
+                            success: false,
+                            message: "No products found",
+                            data: null
+                        }
+                    })
+                }
+            }catch(err){
+                res.status(500).json({
+                    response: {
+                        success: false,
+                        message: "Internal Server Error",
+                        data: null
+                    }
+                })
+            }
+        }else{
+            res.status(400).json({
+                response: {
+                    success: false,
+                    message: "Bad Request",
+                    data: null
+                }
+            })
+        }
+    }

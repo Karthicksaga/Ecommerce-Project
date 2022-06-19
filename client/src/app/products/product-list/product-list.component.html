@@ -1,1 +1,46 @@
-<p>product-list works!</p>
+<div class = "heading_alignment">
+    <h3>Product List</h3>
+</div>
+
+
+<button (click)= "onAddProduct()" class="btn btn-primary">Add Product</button> <br><br>
+
+<table class="table table-striped table-bordered">
+
+<thead>
+<tr>
+    <th>Id</th>
+    <th>Image</th>
+    <th>Name</th>
+    <th>price</th>
+    <th>Description</th>
+    <th>CategoryId</th>
+    <th>Quantity</th>
+    <th>ProductCreatedDate</th>
+    <th>ProductUpdatedDate</th>
+    <th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+    <tr *ngFor="let product of productList; let index=index">
+        <td>{{ product._id }}</td>
+        <td>
+            <img class="thumbnail" src="product.imageUrl" alt="">
+        </td>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.categoryId}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{product.createdAt}}</td>
+        <td>{{product.updatedAt}}</td>
+        <td ><button (click)="onDelete(product._id)" class="btn btn-danger"> <i class="glyphicon glyphicon-trash"></i></button>
+        <button (click)="onEditProduct(product._id)" class="btn btn-warning" style="margin-left: 10px;"> <i class="glyphicon glyphicon-pencil"></i></button></td>
+    </tr>
+
+
+</tbody>
+
+
+</table>

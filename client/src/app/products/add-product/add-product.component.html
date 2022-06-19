@@ -1,0 +1,75 @@
+<br><br><br>
+
+<div class = "heading_alignment">
+    <h3>Add Product</h3>
+</div>
+
+<div class="col-md-3">
+
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="">Name</label>
+      <input [(ngModel)]="name" type="text" class="form-control">
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="">Price</label>
+      <input [(ngModel)]="price" type="text" class="form-control">        
+  </div>
+</div>
+
+</div>
+
+<div class="col-md-3"></div>
+
+<div class="row">
+    
+    <div class="col-md-3">
+        <div class="form-group">
+          <label for="">ImageUrl</label>
+          <input [(ngModel)]="imageUrl" type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="form-group">
+          <label for="">Category</label>
+          <select [(ngModel)]="categoryId" class="form-control">
+            <option *ngFor="let category of categoryList" [value]="category.categoryId">{{category.categoryName}}</option>
+          </select>
+        </div>
+    </div>
+</div>
+<div class="col-md-3"></div>
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="">Quantity</label>
+            <input [(ngModel)]="quantity" type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class ="col-md-3">
+        <div class="form-group">
+            <label for="">Description</label>
+            <input [(ngModel)]="description" type="text" class="form-control" rows="4">
+        </div>
+    </div>
+</div>
+<div class="col-md-3"></div>
+
+<div class="row">
+  <div class="col-md-3">
+    <button (click)="onSubmitProduct()" class="btn btn-success">Add</button>
+    <a style="margin-left: 10px;" routerLink="/login/dashboard/product" class="btn btn-danger">Cancel</a>
+  </div>
+</div>
+
+
