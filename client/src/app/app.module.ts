@@ -32,6 +32,8 @@ import { HomeComponentComponent } from './home-component/home-component.componen
 import { ProductDetailsComponent } from './product/product-details/product-details.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { EditProductComponent } from './products/edit-product/edit-product.component';
+import { ListUserComponent } from './list-user/list-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 //we define all the routes in the main page of the application
@@ -81,7 +83,9 @@ const appRoutes: Routes = [
     HomeComponentComponent,
     ProductDetailsComponent,
     AddProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    ListUserComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

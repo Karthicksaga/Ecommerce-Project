@@ -26,6 +26,29 @@ export class UserService {
   login(payload : object) : Observable<ServerResponse> {
       return this.http.post<ServerResponse>(loginEndpoint, payload);
   }
+
+  updateUserById(userId:String, payload : String){
+    console.log("Update User Profile");
+    const updateUserEndPoint = baseUrl + "/edit-user/" + userId;
+    return this.http.post(updateUserEndPoint, payload);
+  }
+  getUserById(id : String){
+    console.log('Get User By Id');
+    const getUserEndPoint = baseUrl + '/' + id;
+    return this.http.get(getUserEndPoint);
+  }
+
+  getAllUsers(){
+    console.log('Get All Users');
+    const getAllUsersEndPoint = baseUrl + '/all'; 
+    return this.http.get(getAllUsersEndPoint);
+  }
+
+  deleteUserById(id : String){
+    console.log('Remove the User By From the DataBase');
+    const deleteUserEndPoint = baseUrl + '/delete';
+    return this.http.delete(deleteUserEndPoint);
+  }
   
 
 

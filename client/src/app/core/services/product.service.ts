@@ -13,7 +13,7 @@ const baseUrl = 'http://localhost:3000/product';
 })
 export class ProductService {
     constructor(private http: HttpClient) { 
-
+      
     }
     //payload nothing but the data we send to the server
   addProduct(payload: object): Observable<Product> {

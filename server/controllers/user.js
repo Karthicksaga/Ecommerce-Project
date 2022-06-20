@@ -193,6 +193,46 @@ exports.updateCustomerDetails = async (req, res) => {
 }
 
 
+exports.deleteCustomer = async(req,res,next) => {
+
+    console.log("Delete Customer Api called Successfully");
+    const requestBody = req.body;
+    const userId = requestBody.userId;
+
+    if(userId != null){
+        try{
+            
+            const deletedUser = User.remove({
+                _id : userId
+            });
+
+            if(deletedUser){
+                res.status(200).json({
+                    response: {
+                        success: true,
+                        message: 'User Deleted Successfully',
+                        data: deletedUser
+                    }   
+                })
+            }else{
+                res.status(400).json({
+                    response: {
+                        success: false,
+                        message: 'User Not Deleted',
+                        data: null
+                    }   
+                })
+            }
+        }catch{
+            res.status(500).json({
+                success: false,
+                message: 'Internal Server Error',
+                data : null
+            })
+        }
+    }
+}
+
 exports.deleteCustomer = async (req, res) => {
     try{
         console.log(req.user);
