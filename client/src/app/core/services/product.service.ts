@@ -18,7 +18,7 @@ export class ProductService {
     //payload nothing but the data we send to the server
   addProduct(payload: object): Observable<Product> {
     console.log(payload);
-    const createProductUrl = baseUrl + '/add-product';
+    const createProductUrl = baseUrl + '/add_product';
     return this.http.post<Product>(createProductUrl, payload);
   }
 
@@ -28,7 +28,7 @@ export class ProductService {
   }
 
   public getProductById(id : String) {
-    const getProductById = baseUrl + '/get-product/' + id;
+    const getProductById = baseUrl + '/get_product/' + id;
     return this.http.get(getProductById);
   }
 
@@ -37,13 +37,13 @@ export class ProductService {
     return this.http.get(getAllProductsUrl);
   }
 
-  public updateProduct(payload:Object){
-    const updateProductUrl = baseUrl + '/update-product';
+  public updateProduct(productId:String,payload:Object){
+    const updateProductUrl = baseUrl + '/edit_product/'+productId;
       return this.http.post(updateProductUrl, payload);
   }
 
   public onDeleteProduct(id : String){
-    const deleteProductUrl = baseUrl + '/delete_product '+id;
+    const deleteProductUrl = baseUrl + '/delete_product/'+id;
     console.log("Deleted Products Id" + deleteProductUrl);
     return this.http.delete(deleteProductUrl);
   }

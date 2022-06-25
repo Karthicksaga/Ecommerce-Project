@@ -1,14 +1,16 @@
 <nav class="topnav">
     <a routerLink="/home">Home</a>
-    <a routerLink="/book/store/default">Product Store</a>
-    <a routerLink = "/admin/add-product">New Product</a>
+    <a routerLink="/category/Electronics">Electronics</a>
+    <a routerLink="/category/Grocery">Grocery</a>
+    <a routerLink="/category/Clothes">Clothes</a>
+    
     <!-- <ng-template [ngIf]="isUserLogged()">
       <a routerLink="/user/profile/mine">My Profile</a>
       <a routerLink="/user/purchaseHistory">My Purchase History</a>
       <a *ngIf="isUserAdmin()" routerLink="/book/create">Create Book</a>
     </ng-template> -->
     <ng-template [ngIf]="userLoginStatus()">
-      <a  *ngIf="!isAdminUser()" routerLink = "/admin/add-product">New Product</a>
+      <a *ngIf="isCustomerStatus()" routerLink = "/admin/add-product">New Product</a>
     </ng-template>
     
     <div>
@@ -21,9 +23,14 @@
           {{getUserName()}}
           <span>{{username}}</span> Logout
         </a>
-        <a class = "menu-item-right" routerLink="/user/profile/mine">My Profile</a>
-        <a class = "menu-item-right" *ngIf="isAdminUser()" routerLink = "/cart">Cart</a>
-      <a class = "menu-item-right" *ngIf="isAdminUser() "routerLink="/user/order">Order</a>
+      </ng-template>
+      <ng-template [ngIf]="userLoginStatus()">
+        <a class = "menu-item-right" *ngIf="isCustomerStatus()"routerLink="admin/users">Users</a>
+        <a class = "menu-item-right" *ngIf="isCustomerStatus()" routerLink = "admin/all-products">Products</a>
+        <a class = "menu-item-right" *ngIf="isCustomerStatus() "routerLink="/user/order">Orders</a>
+        <a class = "menu-item-right" *ngIf="!isCustomerStatus()"routerLink="/user/profile/mine">My Profile</a>
+        <a class = "menu-item-right" *ngIf="!isCustomerStatus()" routerLink = "/cart">Cart</a>
+        <a class = "menu-item-right" *ngIf="!isCustomerStatus() "routerLink="/user/order">Order</a>
 
       </ng-template>
       

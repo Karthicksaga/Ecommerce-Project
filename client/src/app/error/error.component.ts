@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-error',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    this.goBack();
+  }
+
+  goBack(){
+
+    swal.fire({
+      title: 'page not found',
+      text: 'the page you are looking for does not exist',
+      icon: 'error',
+      confirmButtonText: 'go back'
+    }).then((result) => {
+        console.log("Result" + result);
+        this.router.navigate(['/home']);
+    })
   }
 
 }

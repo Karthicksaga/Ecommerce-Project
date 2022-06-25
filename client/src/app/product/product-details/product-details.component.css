@@ -1,14 +1,9 @@
 
-.color{
-    background-color:moccasin; 
-   /* background-color:whitesmoke;  */
-}
+
 .boxed {
-   
    font-family: 'Courier New', Courier, monospace;
 
 } 
-
-.stepper{
-    font-size: 20px;
+.product_title{
+   margin-left : 150px;
 }

@@ -7,8 +7,8 @@
 }
   
 .container {
-    width: 320px;
-    height: 480px;
+    width: 400px;
+    height: 600px;
     background: #fff;
     box-shadow: 0 10px 15px rgba(179, 179, 179, 0.7);
     position: absolute;
@@ -37,7 +37,7 @@
     padding-top: 0.3rem;
     text-align: center;
 }
-.text h1{
+.text h3{
   text-align: center;
 }
   

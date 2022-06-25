@@ -12,33 +12,34 @@ export class CommonService {
     isUserLogged= new Subject<boolean>();
     userName = new Subject<String>();
     userLoggedIn = new Subject<boolean>();
+    customerStatus = new Subject<boolean>();
     constructor(){
 
     }
 
     //admin Boolean Value is Stored in the Observable
-    public setValue(isAdmin:boolean){
+    public setAdminUserStatus(isAdmin:boolean){
         this.isUserLogged.next(isAdmin);
     }
 
-    public getValue():Observable<boolean>{
+    public getAdminUserStatus():Observable<boolean>{
         return this.isUserLogged.asObservable();
     }
 
-    clearMessages() {
+    public clearAdminUserStatus() {
         this.isUserLogged.next(false);
     }
 
 
-    public setUserLoginStatus(loginStatus:boolean){
+    public setUserStatus(loginStatus:boolean){
         this.userLoggedIn.next(loginStatus);
     }
 
-    public getUserLoginStatus():Observable<boolean>{
+    public getUserStatus():Observable<boolean>{
         return this.userLoggedIn.asObservable();
     }
 
-    public clearUserLoginStatus(){
+    public clearUserStatus(){
         this.userLoggedIn.next(false);
     }
 
@@ -60,6 +61,18 @@ export class CommonService {
 
     public clearSessionToken(){
         localStorage.removeItem('token');
+    }
+
+    public setCustomerStatus(value : boolean){
+        this.customerStatus.next(value);
+    }
+    
+    public getCustomerStatus():Observable<boolean>{
+        return this.customerStatus.asObservable();
+    }
+
+    public clearCustomerStatus(){
+        return this.customerStatus.next(false);
     }
 }
 

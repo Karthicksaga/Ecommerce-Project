@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 import { CommonService } from 'src/app/core/services/common.service';
 import { Subscription } from 'rxjs';
-import SweetAlert from 'sweetalert2/dist/sweetalert2.js'
+import swal from 'sweetalert2'
 
 
 
@@ -39,20 +39,37 @@ export class LoginComponent implements OnInit {
     let formValue = this.loginForm.value.loginFormData;
     this.userService.login(formValue)
     .subscribe((response) => {
-        console.log(response);
-        let data = response.data;
-        if(data.success){
-          this.isAdminFlag = data.isAdmin;
-          this.commonService.setValue(true);
-          this.commonService.setToken(data.token);
-          console.log(data.userName);
-          this.commonService.setUserName(data.userName);
-          this.commonService.setUserLoginStatus(true);
-          this.router.navigate(['/home']);
-        }
+
+       const serverResponse = response["response"];
+       if(serverResponse["success"] == true){
+        const userData = serverResponse['data'];
+        console.log(userData);
+        this.commonService.setAdminUserStatus(userData['isAdmin']);
+        this.commonService.setCustomerStatus(userData['isAdmin']);
+        this.commonService.setToken(userData["token"]);
+        this.commonService.setUserName(userData["name"]);
+        this.commonService.setUserStatus(true);
+        swal.fire({
+            title: "Success",
+            text : "Logged in Successfully",
+            icon: "success",
+            confirmButtonText: "HomePage"
+            
+          }).then((result) => {
+
+            this.router.navigate(['/home']);
+          })
+       }else{
+            swal.fire({
+              title : "Error",
+              text : "Invalid Credentials",
+              icon: "error"
+            })
+       }
+
     },
     (error) => {
-      console.log(error.error.data.message);
+      console.log(error);
     })
   }
 }

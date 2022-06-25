@@ -4,7 +4,6 @@ const express = require('express');
 
 //const productController = require('../controllers/productController');
 const productController = require('../controllers/productController');
-
 const router = express.Router();
 
 
@@ -12,16 +11,12 @@ router.post('/test', productController.createTestProduct);
 router.get('/get_products', productController.getAllProducts);
 router.get('/get_product/:productId', productController.findByProductById);
 router.post('/add_product', productController.addProduct);
-
 router.post('/edit_product/:productId', productController.updateProduct);
-
 router.delete('/delete_product/:productId', productController.deleteProduct);
+router.get('/getCategory/:categoryId', productController.getProductsByCategory);
 
 // router.post('/product', productController.addProduct);
-
-
 //router.get('/products/:productId', productController.getProductById);
-
 // router.get('/cart', shopController.getCart);
 
 // router.post('/cart', shopController.postCart);

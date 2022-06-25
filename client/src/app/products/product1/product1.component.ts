@@ -13,9 +13,49 @@ export class Product1Component implements OnInit {
 
   Products: any[]
   username: any
+  categoryId = 1;
 
   constructor(private router:Router,
       private product1Service:Product1Service) { 
+  }
+
+
+  public getAllProductByCategory(){
+
+    this.product1Service
+    .getProductsByCategoryId(this.categoryId)
+    .subscribe(response => {
+      console.log("Server Response : " + response);
+      const serverResponse = response['response'];
+
+      if(serverResponse['status']  === true){
+        this.Products = serverResponse['data'];
+        if(this.Products !== null){
+          swal.fire({
+            title : "Success",
+            "text" : serverResponse['message'],
+            icon : "success",
+            timer : 2000
+          });
+        }else{
+          swal.fire({
+              title : "Error",
+              "text" : serverResponse['message'],
+              icon: "success",
+              timer : 2000
+          })
+        }
+      }else{
+        console.log("Server Response" + serverResponse);
+        swal.fire({
+          title : "Error",
+          text : serverResponse['message'],
+          icon : "error",
+          timer : 2000
+        })
+      }
+    }
+    )
   }
 
   public getAllProducts() {
@@ -23,22 +63,25 @@ export class Product1Component implements OnInit {
     .getProducts()
     .subscribe(response => {
       console.log(response);
-      if(response['success'] ===  true) {
-        if(response['data'].length > 0) {
+      const serverResponse = response;
+      if(serverResponse['success'] ===  true) {
+        if(serverResponse['data'].length > 0) {
 
-          this.Products = response['data'];
+          this.Products = serverResponse['data'];
           swal.fire({
             title: 'Success',
             text:response['message'],
-            icon : "success"
+            icon : "success",
+            timer : 1000
           })
         }
       }else{
-        alert(response['message']);
+        alert(serverResponse['message']);
         swal.fire({
           title: 'Error',
           text:response['message'],
-          icon : "error"
+          icon : "error",
+          timer : 1000,
         })
       }
     })

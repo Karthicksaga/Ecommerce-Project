@@ -39,16 +39,17 @@ export class AddProductComponent implements OnInit {
       }
       this.productService.addProduct(this.productData)
      .subscribe((response) => {
-      if(response['success'] === true){
+      const serverResponse = response['response'];
+      if(serverResponse['success'] === true){
         swal.fire({
           title: 'Success',
-          text:response['message'],
+          text:serverResponse['message'],
           icon : "info"
         })
     }else{
       swal.fire({
         title: 'Error',
-        text:response['message'],
+        text:serverResponse['message'],
         icon : "error"
       })
     }

@@ -140,7 +140,7 @@ exports.getAllProducts = async(req,res,next) => {
     //FindByProductName
     exports.findByProductById = async(req,res,next) => {
         const productId = req.params.productId;
-        if(productId != null){
+        if(productId !== null && productId !== undefined) {
             try{
                 const product = await Product.find({
                     _id: productId

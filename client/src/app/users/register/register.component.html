@@ -1,16 +1,28 @@
 <form [formGroup] = "registerForm" (ngSubmit) = "onSubmit()">
   <div class="container">
       <div class="text">
-          <h1>Register</h1>
+          <h3>Register</h3>
       </div>
       <div formGroupName = "registerFormData">
           <div class="your-input">
           <div class="input">
               <input type="text" formControlName="name" 
-                  id="email" required />
-              <label for="email">Username</label>
+                  id="name" required />
+              <label for="name">Username</label>
           </div>
-          <p *ngIf = "!registerForm.get('registerFormData.name').valid && registerForm.get('registerFormData.uname').touched">Username Required</p>
+          <p *ngIf = "!registerForm.get('registerFormData.name').valid && registerForm.get('registerFormData.name').touched">Username Required</p>
+          <div class="input">
+            <input type="text" formControlName="fname" 
+                id="fname" required />
+            <label for="fname">FirstName</label>
+        </div>
+        <p *ngIf = "!registerForm.get('registerFormData.fname').valid && registerForm.get('registerFormData.fname').touched">FirstName Required</p>
+        <div class="input">
+            <input type="text" formControlName="lname" 
+                id="lname" required />
+            <label for="lname">LastName</label>
+        </div>
+        <p *ngIf = "!registerForm.get('registerFormData.lname').valid && registerForm.get('registerFormData.lname').touched">LastName Required</p>
           <div class="input">
             <input type="text" formControlName="phone" id="phone"
                 id="phone" required />

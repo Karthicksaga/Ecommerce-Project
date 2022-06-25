@@ -18,13 +18,16 @@ export class UserService {
 
     }
     //payload nothing but the data we send to the server
-  register(payload: object): Observable<User> {
+  register(payload: object) {
     console.log(payload);
-    return this.http.post<User>(registerEndpoint, payload);
+    console.log(JSON.stringify(payload));
+    return this.http.post(registerEndpoint, payload);
   }
 
-  login(payload : object) : Observable<ServerResponse> {
-      return this.http.post<ServerResponse>(loginEndpoint, payload);
+  login(payload : object) {
+      
+      console.log(payload);
+      return this.http.post(loginEndpoint, payload);
   }
 
   updateUserById(userId:String, payload : String){
@@ -40,7 +43,7 @@ export class UserService {
 
   getAllUsers(){
     console.log('Get All Users');
-    const getAllUsersEndPoint = baseUrl + '/all'; 
+    const getAllUsersEndPoint = baseUrl + '/allUsers'; 
     return this.http.get(getAllUsersEndPoint);
   }
 

@@ -1,8 +1,6 @@
-
-<br><br><br>
 <!-- <button (click)= "dashboard()" class="btn btn-default" style="margin-top: 10px;">Dashboard</button> -->
 
-<h1>List Users</h1>
+<h3 class = "header_alignment">List Users</h3>
 <!-- <button (click)= "onAdduser()" class="btn btn-primary">Add MRs</button> <br><br> -->
 
 <table class="table table-striped table-bordered">
@@ -15,21 +13,19 @@
     <th>LastName</th>
     <th>Email</th>
     <th>phone</th>
-    <th>password</th>
 </tr>
 </thead>
 
 <tbody>
     <tr *ngFor="let user of userList;let index = index">
         <td>{{user._id}}</td>
-        <td>{{user.username}}</td>
-        <td>{{user.firstName}}</td>
-        <td>{{user.lastName}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.fname}}</td>
+        <td>{{user.lname}}</td>
         <td>{{user.email}}</td>
         <td>{{user.phone}}</td>
-        <td>{{user.password}}</td>
         <td ><button (click)="ondelete(user._id)" class="btn btn-danger">   <i class="glyphicon glyphicon-trash"></i></button>
-        <button (click)="onUserSelect(user._id)" class = "btn btn-warning" style="margin-left: 10px;"><i class="glyphicon glyphicon-pencil"></i></button>
+        <button (click) = "onEditUserDetails(user._id)" class = "btn btn-warning" style="margin-left: 10px;"><i class="glyphicon glyphicon-pencil"></i></button>
         <button (click)="onOrderList(user._id)" class = "btn btn-info" style="margin-top: 10px;margin-left: 10px;"> <a href="/MRlogin/dashboard/MRorders/{{user.id}}"> ShowOrders </a> </button>
         <button  class = "btn btn-info" style="margin-top: 10px;">Track Location </button>
     </td>

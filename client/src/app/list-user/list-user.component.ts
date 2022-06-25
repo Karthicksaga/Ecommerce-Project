@@ -32,7 +32,6 @@ export class ListUserComponent implements OnInit {
         icon : "success",
         timer : 2000
       })
-
     }
     else{
       console.log("Failed to Fetch the Users");
@@ -47,7 +46,8 @@ export class ListUserComponent implements OnInit {
  }
 
   onEditUserDetails(id: String){
-    this.router.navigate(['/login/dashboard/user/edit_user/'+id])
+    console.log("Passing the user id to edit the product details" + id);
+    this.router.navigate(['login/user/edit-user/'+id])
   }
   
   

@@ -15,11 +15,15 @@ router.post('/login', userController.loginCustomer);
 
 router.get('/logout', userController.logoutCustomer);
 
+router.get('/allUsers', userController.getAllUsers);
+
 router.get('/logoutAll', userController.logoutAllCustomer);
 
-router.patch('/updateCustomerDetails', userController.updateCustomerDetails);
+router.put('/updateCustomerDetails/:id', userController.updateCustomerDetails);
 
-router.delete('/removeAccount', userController.deleteCustomer);
+router.delete('/removeUser/:id', userController.deleteCustomer);
+
+router.get('/:id', userController.getUserById);
 
 
 module.exports = router;

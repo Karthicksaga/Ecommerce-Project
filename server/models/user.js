@@ -9,6 +9,16 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    fname : {
+        type: String,
+        required: true,
+        trim: true
+    },
+    lname : {
+        type: String,
+        required: true,
+        trim: true
+    },
     phone: {
         type: Number,
         required: true,

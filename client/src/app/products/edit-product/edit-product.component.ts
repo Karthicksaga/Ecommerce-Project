@@ -27,17 +27,23 @@ export class EditProductComponent implements OnInit {
     private activeRoute: ActivatedRoute) {
 
       this.id = this.activeRoute.snapshot.params['id'];
-
+      console.log("Edit Product Component is called");
+      console.log("Product Id : " + this.id);
       this.productService.getProductById(this.id).subscribe((response) => {
         console.log('Server Response ' + response);
         const serverResponse = response['response']
         if(serverResponse['success'] == true){
-          this.name = serverResponse['data'].name
-          this.description = serverResponse['data'].description
-          this.imageUrl = serverResponse['data'].imageUrl
-          this.price = serverResponse['data'].price
-          this.quantity = serverResponse['data'].quantity
-          this.categoryId = serverResponse['data'].categoryId
+          console.log("Product Fetched Successfully from the database" + serverResponse['data']);
+          const responseData = serverResponse['data'][0];
+          console.log("Product Fetched Successfully from the database" + responseData);
+          
+          this.name = responseData['name'];
+          console.log(responseData['name']);
+          this.description = responseData['description']
+          this.imageUrl = responseData['imageUrl']
+          this.price = responseData['price']
+          this.quantity = responseData['quantity']
+          this.categoryId = responseData['categoryId']
 
           swal.fire({
             title: 'Success',
@@ -74,7 +80,7 @@ export class EditProductComponent implements OnInit {
       quantity : this.quantity
     }
 
-    this.productService.updateProduct(this.updateProductDetails)
+    this.productService.updateProduct(this.id,this.updateProductDetails)
     .subscribe((response) => {
       const serverResponse = response['response']
       if(serverResponse['success'] === true){
@@ -82,7 +88,9 @@ export class EditProductComponent implements OnInit {
           title: 'Success',
           text:serverResponse['message'],
           icon : "success",
-          timer : 2000
+          confirmButtonText: 'ProductList'
+        }).then((result) => {
+          this.router.navigate(['/admin/all-products']);
         })
       }else{
         swal.fire({

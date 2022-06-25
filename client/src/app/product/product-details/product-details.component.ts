@@ -21,7 +21,7 @@ export class ProductDetailsComponent implements OnInit {
     constructor(private productDetailService:ProductDetailsService,
         private activateRoute:ActivatedRoute,
         private cartService: ProductDetailsService,
-        private route:Router) {
+        private router:Router) {
          
         // is used to snapshot the params 
         this.id = this.activateRoute.snapshot.params['id'];
@@ -51,7 +51,7 @@ export class ProductDetailsComponent implements OnInit {
                       icon : "error",
                   })
                   
-                  this.route.navigate(['/productNotFound'])
+                  this.router.navigate(['/productNotFound'])
               }
             }else{
               swal.fire({
@@ -92,4 +92,8 @@ export class ProductDetailsComponent implements OnInit {
             this.rate = this.productPrice * this.count
         }
      } 
+
+     OnBack(){
+      this.router.navigate(["/home"])
+     }
 }

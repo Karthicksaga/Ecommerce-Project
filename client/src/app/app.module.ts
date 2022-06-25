@@ -44,12 +44,15 @@ const appRoutes: Routes = [
   {path : 'home', component: HomeComponentComponent},
   {path :'users/login', component : LoginComponent},
   {path : "users/register", component : RegisterComponent},
+  {path : 'login/user/edit-user/:id', component : EditUserComponent},
   {path : 'admin/add-product', component : AddProductComponent},
   {path :'admin', component : AdminComponent,children : [
   {path : 'products', component: ProductsComponent}
   ]},
   {path : 'admin/all-products', component : ProductListComponent},
+  {path : 'admin/edit-product/:id', component : EditProductComponent},
   {path : 'product-details/:id', component : ProductDetailsComponent},
+  {path : 'admin/users', component: ListUserComponent},
   {path : 'productNotFound', component : ErrorComponent}, //'}
   {path : 'shop', component : ShopComponent, children: [
   {'path' : 'products' , component: ProductsComponent},
