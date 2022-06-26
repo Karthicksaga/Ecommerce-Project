@@ -15,7 +15,7 @@ export class Product1Service {
     getProductsByCategoryId(cId : number){
 
       const categoryId = cId;
-      const categoryRegisterPoint = this.url + "/products/getCategory/" + categoryId 
+      const categoryRegisterPoint = this.url + "product/getCategory/" + categoryId 
       return this.httpClient.get(categoryRegisterPoint);
 
      }

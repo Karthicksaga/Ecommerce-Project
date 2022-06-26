@@ -1,7 +1,5 @@
-<br><br>
-<br>
-<h2 class="boxed">Electronics Product</h2> 
-<div class="col-md-4" *ngFor="let product of Products;let index = index" >
+
+<div class="col-md-4" *ngFor="let product of products;let index = index" >
  
 <div class="boxed">    
 
@@ -9,7 +7,7 @@
 <div class="row">
     <div class="col-md-3">
       
-        <img style="border:1px solid green" src="product.imageUrl" width="250px;" height="300px;"/>
+        <img style="border:1px solid green" src={{product.imageUrl}} width="250px;" height="300px;"/>
     </div>
 </div>
     
@@ -22,23 +20,13 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-9">
-      
-     <b>  {{product.description}} </b>   
-    </div>
-</div>
-  
 
 <div class="col-md-2"></div>
 <div class="row">
     <div class="col-md-8">
-      
-     <td><font color="red">MRP ₹<del>{{product.price}}</del></font></td>    
+     <td><font color="red">₹{{product.price}}</font></td>    
     </div>
 </div>
-
-<div class="col-md-2"></div>
 
 
 <div class="col-md-2"></div>

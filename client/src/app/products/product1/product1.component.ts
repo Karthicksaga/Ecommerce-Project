@@ -11,7 +11,7 @@ import swal from 'sweetalert2';
 
 export class Product1Component implements OnInit {
 
-  Products: any[]
+  products: any[]
   username: any
   categoryId = 1;
 
@@ -19,7 +19,9 @@ export class Product1Component implements OnInit {
       private product1Service:Product1Service) { 
   }
 
-
+  ngOnInit() { 
+    this.getAllProductByCategory();
+  }
   public getAllProductByCategory(){
 
     this.product1Service
@@ -28,23 +30,18 @@ export class Product1Component implements OnInit {
       console.log("Server Response : " + response);
       const serverResponse = response['response'];
 
-      if(serverResponse['status']  === true){
-        this.Products = serverResponse['data'];
-        if(this.Products !== null){
+      if(serverResponse['success'] == true){
+
+        console.log("Electronic Product fetched Successfully");
+        this.products = serverResponse['data'];
+        console.log(this.products);
+       
           swal.fire({
             title : "Success",
             "text" : serverResponse['message'],
             icon : "success",
             timer : 2000
           });
-        }else{
-          swal.fire({
-              title : "Error",
-              "text" : serverResponse['message'],
-              icon: "success",
-              timer : 2000
-          })
-        }
       }else{
         console.log("Server Response" + serverResponse);
         swal.fire({
@@ -67,7 +64,7 @@ export class Product1Component implements OnInit {
       if(serverResponse['success'] ===  true) {
         if(serverResponse['data'].length > 0) {
 
-          this.Products = serverResponse['data'];
+          this.products = serverResponse['data'];
           swal.fire({
             title: 'Success',
             text:response['message'],
@@ -87,9 +84,7 @@ export class Product1Component implements OnInit {
     })
     
 }
-  ngOnInit() { 
-  
-  }
+ 
 
 OnSelectProduct(id: number) {
   this.router.navigate(['/product/product_details/'+id])

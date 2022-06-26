@@ -34,6 +34,7 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { EditProductComponent } from './products/edit-product/edit-product.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { Product1Service } from './products/product1/product1.component.service'
 
 
 //we define all the routes in the main page of the application
@@ -53,6 +54,9 @@ const appRoutes: Routes = [
   {path : 'admin/edit-product/:id', component : EditProductComponent},
   {path : 'product-details/:id', component : ProductDetailsComponent},
   {path : 'admin/users', component: ListUserComponent},
+  {path : 'category/Electronics', component: Product1Component},
+  {path : 'category/groceries', component : Product2Component},
+  {path : 'category/clothes', component : Product3Component},
   {path : 'productNotFound', component : ErrorComponent}, //'}
   {path : 'shop', component : ShopComponent, children: [
   {'path' : 'products' , component: ProductsComponent},
@@ -98,7 +102,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule
   ],
-  providers: [UserService],
+  providers: [UserService, Product1Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

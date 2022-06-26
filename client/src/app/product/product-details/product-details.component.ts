@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ProductDetailsService } from './product-details.component.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { CommonService } from '../../core/services/common.service';
 import swal from 'sweetalert2';
 import { CartService } from '../../core/services/cart.service';
+import jwt_decode, {JwtPayload}from 'jwt-decode';
+
 
 @Component({
   selector: 'app-product-details',
@@ -21,6 +24,7 @@ export class ProductDetailsComponent implements OnInit {
     constructor(private productDetailService:ProductDetailsService,
         private activateRoute:ActivatedRoute,
         private cartService: ProductDetailsService,
+        private commonService : CommonService,
         private router:Router) {
          
         // is used to snapshot the params 
@@ -95,5 +99,21 @@ export class ProductDetailsComponent implements OnInit {
 
      OnBack(){
       this.router.navigate(["/home"])
+     }
+     onAddToCart(){
+      console.log(this.commonService.getToken());
+      let userToken = this.commonService.getToken();
+      if(userToken !== null && userToken !==undefined){
+
+        const decodedToken = jwt_decode<JwtPayload>(userToken);
+        console.log(decodedToken);
+
+      }else{
+        swal.fire({
+          title: 'Information',
+          text : "Please login  Firet and purchase the Product",
+          icon: 'info'
+        })
+      }
      }
 }

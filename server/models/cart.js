@@ -11,7 +11,8 @@ const cartSchema = mongoose.Schema({
         productId: mongoose.Types.ObjectId,
         quantity: Number,
         name : String,
-        price: Number
+        price: Number,
+        imageUrl: String
 
     }],
     modifiedOn : {

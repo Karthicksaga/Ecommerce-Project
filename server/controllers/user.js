@@ -151,7 +151,8 @@ exports.loginCustomer = async(req,res,next) => {
                 response: {
                     message : "Login Successfully",
                     success: true,
-                    data : user
+                    data : user,
+                    token : token
                 }
             });
         }catch(e){

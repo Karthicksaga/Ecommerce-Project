@@ -46,7 +46,9 @@ export class LoginComponent implements OnInit {
         console.log(userData);
         this.commonService.setAdminUserStatus(userData['isAdmin']);
         this.commonService.setCustomerStatus(userData['isAdmin']);
-        this.commonService.setToken(userData["token"]);
+        this.commonService.setToken(serverResponse["token"]);
+
+        console.log("Token : "+ serverResponse["token"]);
         this.commonService.setUserName(userData["name"]);
         this.commonService.setUserStatus(true);
         swal.fire({

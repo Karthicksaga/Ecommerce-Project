@@ -59,6 +59,10 @@ export class CommonService {
         localStorage.setItem('token',token);
     }
 
+    public getToken(){
+        return localStorage.getItem('token');
+    }
+
     public clearSessionToken(){
         localStorage.removeItem('token');
     }
