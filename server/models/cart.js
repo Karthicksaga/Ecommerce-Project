@@ -12,7 +12,7 @@ const cartSchema = mongoose.Schema({
         quantity: Number,
         name : String,
         price: Number,
-        imageUrl: String
+        imageUrl: String,
 
     }],
     modifiedOn : {

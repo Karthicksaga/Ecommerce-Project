@@ -37,8 +37,7 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     console.log(this.loginForm);
     let formValue = this.loginForm.value.loginFormData;
-    this.userService.login(formValue)
-    .subscribe((response) => {
+    this.userService.login(formValue).subscribe((response) => {
 
        const serverResponse = response["response"];
        if(serverResponse["success"] == true){
@@ -47,7 +46,6 @@ export class LoginComponent implements OnInit {
         this.commonService.setAdminUserStatus(userData['isAdmin']);
         this.commonService.setCustomerStatus(userData['isAdmin']);
         this.commonService.setToken(serverResponse["token"]);
-
         console.log("Token : "+ serverResponse["token"]);
         this.commonService.setUserName(userData["name"]);
         this.commonService.setUserStatus(true);
@@ -64,14 +62,19 @@ export class LoginComponent implements OnInit {
        }else{
             swal.fire({
               title : "Error",
-              text : "Invalid Credentials",
+              text : serverResponse['message'],
               icon: "error"
             })
        }
 
     },
-    (error) => {
+    (error : any) => {
       console.log(error);
+      swal.fire({
+        title : "Error",
+        text : "invalid Credentials",
+        icon: "error"
+      })
     })
   }
 }

@@ -25,7 +25,6 @@ export class UserService {
   }
 
   login(payload : object) {
-      
       console.log(payload);
       return this.http.post(loginEndpoint, payload);
   }

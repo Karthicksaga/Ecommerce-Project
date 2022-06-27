@@ -1,0 +1,51 @@
+<br><br>
+
+<div class="color">
+<!-- <h3 class="boxed">{{msg}}:-</h3> -->
+
+<div class="row" *ngFor="let product of cartProductList">
+      
+<div class="boxed">    
+
+        <div class="col-md-1"></div> 
+        <div class="row">
+            <div class="col-md-2">
+                <img style="border:1px solid green" src="{{ product.imageUrl  }}" width="200px;" height="300px;"/><br><br>
+            </div>
+            <div class="row">
+                <div class="col-md-3"> 
+                <br><br><br>
+                 <b>  {{product.name}}  </b> <br><br>
+                 <b> <td>quantity:- <font color="blue"> {{product.quantity}}</font></td> </b> <br>
+                 <b> <td>Price:- <font color="blue"> {{product.price}}</font></td> </b> <br>
+                  <br>
+                <button (click)="onEdit(product.productId,product.quantity)" type="button" class="btn btn-info">Edit</button>
+                </div>
+
+            </div>          
+
+        </div>      
+  </div>
+    
+</div>
+
+<div class = "col-md-3"></div>
+
+<div class = "row">
+   
+        <div *ngIf = empty>
+
+            <div class="hello">   <b> <td>Your Total Amount:- <font color="blue"> ₹{{totalAmount}}/-</font></td> </b> </div> 
+            <div class = "col-md-3"></div>
+             <div class="hello">  <button style="margin-top: 7px;margin-left: 7px" type="button" class="btn btn-success" (click)="onOrderPlace()"><b>Place order</b></button> </div> <br><br>
+        </div>
+    
+</div>
+
+       
+</div>
+
+
+
+
+      

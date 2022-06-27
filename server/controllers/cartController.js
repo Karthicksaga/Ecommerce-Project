@@ -173,7 +173,8 @@ exports.addToCart = async (req,res,next) => {
                                                         productId : productId,
                                                         quantity : addedProductQuantity,
                                                         name : product.name,
-                                                        price : product.price * addedProductQuantity
+                                                        price : product.price * addedProductQuantity,
+                                                        imageUrl : product.imageUrl
                                                     
                                                 }
 
@@ -237,7 +238,8 @@ exports.addToCart = async (req,res,next) => {
                                                     productId : productId,
                                                     quantity : addedProductQuantity,
                                                     name : product.name,
-                                                    price : product.price * addedProductQuantity
+                                                    price : product.price * addedProductQuantity,
+                                                    imageUrl : product.imageUrl
                                                 }],
                                                 modifiedOn : Date.now()
                                             })

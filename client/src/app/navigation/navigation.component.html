@@ -29,7 +29,7 @@
         <a class = "menu-item-right" *ngIf="isCustomerStatus()" routerLink = "admin/all-products">Products</a>
         <a class = "menu-item-right" *ngIf="isCustomerStatus() "routerLink="/user/order">Orders</a>
         <a class = "menu-item-right" *ngIf="!isCustomerStatus()"routerLink="/user/profile/mine">My Profile</a>
-        <a class = "menu-item-right" *ngIf="!isCustomerStatus()" routerLink = "/cart">Cart</a>
+        <a class = "menu-item-right" *ngIf="!isCustomerStatus()" routerLink = "user/cart">Cart</a>
         <a class = "menu-item-right" *ngIf="!isCustomerStatus() "routerLink="/user/order">Order</a>
 
       </ng-template>

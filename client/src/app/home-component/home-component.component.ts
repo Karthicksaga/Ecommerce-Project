@@ -28,6 +28,9 @@ export class HomeComponentComponent implements OnInit {
   });
   swal.showLoading();
     console.log("Home component get all products called");
+    // if(localStorage.getItem('token') != undefined){
+    //   localStorage.removeItem('token');
+    // }
     this.productService
       .getAllProducts()
       .subscribe(response => {

@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductDetailsService } from './product-details.component.service';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import { CartService } from '../../core/services/cart.service'
-import { CommonService } from '../../core/services/common.service';
+import { ProductDetailsService } from '../product/product-details/product-details.component.service';
+import { Router,ActivatedRoute } from '@angular/router';
+import { CommonService } from '../core/services/common.service';
+import { CartService } from '../core/services/cart.service';
 import swal from 'sweetalert2';
-import jwt_decode, {JwtPayload}from 'jwt-decode';
-
+import jwt_decode, { JwtPayload } from 'jwt-decode'
 
 @Component({
-  selector: 'app-product-details',
-  templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css']
+  selector: 'app-cart-product-details',
+  templateUrl: './cart-product-details.component.html',
+  styleUrls: ['./cart-product-details.component.css']
 })
-export class ProductDetailsComponent implements OnInit {
+export class CartProductDetailsComponent implements OnInit {
 
-    product: any
+  product: any
     productPrice:number;
     count: number = 1
     rate: number;
@@ -32,6 +30,7 @@ export class ProductDetailsComponent implements OnInit {
          
         // is used to snapshot the params 
         this.id = this.activateRoute.snapshot.params['id'];
+        console.log("Product Id :" + this.id);
       
         if(this.id)
         {
@@ -43,7 +42,19 @@ export class ProductDetailsComponent implements OnInit {
                     this.product = serverResponse['data'][0];
                     this.productPrice = this.product['price'];
                     console.log(this.productPrice);
-                    this.rate = this.productPrice;
+                    
+                    if(localStorage.getItem !== undefined){
+                      this.count = parseInt(localStorage.getItem('quantity'));
+                      this.rate = this.productPrice * this.count;
+                    }else{
+                      swal.fire({
+                        'title' : 'Error',
+                        text : 'quantity is not found',
+                        icon : 'error'
+                      })
+                    }
+                   
+
                     console.log(this.product);
                     swal.fire({
                       title: 'Success',
@@ -115,6 +126,9 @@ export class ProductDetailsComponent implements OnInit {
         this.userId = decodedToken['_id'];
         this.productId = prodId;
         
+        if(localStorage.hasOwnProperty('quantity')){
+          localStorage.removeItem('quantity');
+        }
         if(this.userId != null && this.userId != undefined && this.productId != null && this.productId != undefined
           && this.count != null && this.count != undefined){
             requestBody['productId'] = this.productId;
@@ -124,9 +138,7 @@ export class ProductDetailsComponent implements OnInit {
             console.log(requestBody);
             this.cartService.addProductIntoCart(requestBody)
             .subscribe(response =>{
-
               const serverResponse = response['response'];
-
               if(serverResponse != null && serverResponse != undefined){
 
                 if(serverResponse['success'] == true){
@@ -173,4 +185,5 @@ export class ProductDetailsComponent implements OnInit {
         })
       }
      }
+
 }

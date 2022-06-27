@@ -34,7 +34,9 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { EditProductComponent } from './products/edit-product/edit-product.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
-import { Product1Service } from './products/product1/product1.component.service'
+import { Product1Service } from './products/product1/product1.component.service';
+import { UserCartComponent } from './user-cart/user-cart.component';
+import { CartProductDetailsComponent } from './cart-product-details/cart-product-details.component'
 
 
 //we define all the routes in the main page of the application
@@ -50,6 +52,7 @@ const appRoutes: Routes = [
   {path :'admin', component : AdminComponent,children : [
   {path : 'products', component: ProductsComponent}
   ]},
+  {path : 'user/cart', component : UserCartComponent},
   {path : 'admin/all-products', component : ProductListComponent},
   {path : 'admin/edit-product/:id', component : EditProductComponent},
   {path : 'product-details/:id', component : ProductDetailsComponent},
@@ -57,6 +60,7 @@ const appRoutes: Routes = [
   {path : 'category/Electronics', component: Product1Component},
   {path : 'category/groceries', component : Product2Component},
   {path : 'category/clothes', component : Product3Component},
+  {path : 'cart/product-details/:id', component : CartProductDetailsComponent},
   {path : 'productNotFound', component : ErrorComponent}, //'}
   {path : 'shop', component : ShopComponent, children: [
   {'path' : 'products' , component: ProductsComponent},
@@ -92,7 +96,9 @@ const appRoutes: Routes = [
     AddProductComponent,
     EditProductComponent,
     ListUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    UserCartComponent,
+    CartProductDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -105,4 +111,4 @@ const appRoutes: Routes = [
   providers: [UserService, Product1Service],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

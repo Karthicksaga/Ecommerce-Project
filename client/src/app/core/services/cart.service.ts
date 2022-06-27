@@ -15,15 +15,29 @@ export class CartService{
 
     public addProductIntoCart(payload : Object){
 
-        this.cartAddUrl = this.baseUrl + '/add_cart';
-        console.log("Cart Http Client Called ");
+        console.log(payload);
+        this.cartAddUrl = this.baseUrl + 'add_cart';
+        console.log("Add to Cart Data is Called ");
         return this.httpClient.post(this.cartAddUrl,payload);
     }
 
-    public getCartDetails(){
+    public updateCartDetails(payload : Object){
+
+        console.log(payload);
+        const cartUpdateUrl = this.baseUrl + 'update_cart';
+        return this.httpClient.post(cartUpdateUrl, payload);
+    }
+    // public getCartDetails(payload: any)
             
-            this.cartGetUrl = this.baseUrl + '/get_cart';
-            console.log("Cart Http Client Called ");
-            return this.httpClient.get(this.cartGetUrl);
+    //         this.cartGetUrl = this.baseUrl + '/get-cart';
+    //         console.log("Cart Http Client Called ");
+    //         return this.httpClient.post(payload,this.cartGetUrl);
+    // }
+
+    public getCartDetails(payload : any){
+        console.log("Get Cart Details Function Called ....\n");
+        console.log(payload);
+        this.cartGetUrl = this.baseUrl + 'get-cart'
+        return this.httpClient.post(this.cartGetUrl, payload);
     }
 }
