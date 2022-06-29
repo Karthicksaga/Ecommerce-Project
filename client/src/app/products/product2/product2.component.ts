@@ -12,20 +12,17 @@ import swal from 'sweetalert2';
 
 export class Product2Component implements OnInit {
 
-    Products: any[]
-    username: any
-    categoryId = 2
+  products: any[]
+  username: any
+  categoryId = 2;
 
-    constructor(private router:Router,
-        private product1Service:Product1Service) { 
-      // this.loadflag()
-      //this.loadAllProducts()
-    }
+  constructor(private router:Router,
+      private product1Service:Product1Service) { 
+  }
 
-    ngOnInit() { 
-    
-    }
-
+  ngOnInit() { 
+    this.getAllProductByCategory();
+  }
   public getAllProductByCategory(){
 
     this.product1Service
@@ -34,23 +31,18 @@ export class Product2Component implements OnInit {
       console.log("Server Response : " + response);
       const serverResponse = response['response'];
 
-      if(serverResponse['status']  === true){
-        this.Products = serverResponse['data'];
-        if(this.Products !== null){
+      if(serverResponse['success'] == true){
+
+        console.log("Electronic Product fetched Successfully");
+        this.products = serverResponse['data'];
+        console.log(this.products);
+       
           swal.fire({
             title : "Success",
             "text" : serverResponse['message'],
             icon : "success",
             timer : 2000
           });
-        }else{
-          swal.fire({
-              title : "Error",
-              "text" : serverResponse['message'],
-              icon: "success",
-              timer : 2000
-          })
-        }
       }else{
         console.log("Server Response" + serverResponse);
         swal.fire({
@@ -60,16 +52,54 @@ export class Product2Component implements OnInit {
           timer : 2000
         })
       }
+    },(error : any) => {
+      swal.fire({
+        title : "Error",
+        text : "product not found",
+        icon : "error",
+        confirmButtonText : "Back-to-home-Page"
+        
+      }).then((result) => {
+        this.router.navigate(['/home'])
+      })
     }
     )
   }
 
-  
+  public getAllProducts() {
+  this.product1Service
+    .getProducts()
+    .subscribe(response => {
+      console.log(response);
+      const serverResponse = response;
+      if(serverResponse['success'] ===  true) {
+        if(serverResponse['data'].length > 0) {
 
+          this.products = serverResponse['data'];
+          swal.fire({
+            title: 'Success',
+            text:response['message'],
+            icon : "success",
+            timer : 1000
+          })
+        }
+      }else{
+        alert(serverResponse['message']);
+        swal.fire({
+          title: 'Error',
+          text:response['message'],
+          icon : "error",
+          timer : 1000,
+        })
+      }
+    })
+    
+}
+ 
 
-  OnSelectProduct(id: number) {
-    this.router.navigate(['product/product_details/'+id])
-  }
-
+OnSelectProduct(id: String) {
+  console.log("Product Id :" + id)
+  this.router.navigate(['product-details/'+id])
+}
 }
 

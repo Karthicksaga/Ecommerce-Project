@@ -36,7 +36,10 @@ import { ListUserComponent } from './list-user/list-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { Product1Service } from './products/product1/product1.component.service';
 import { UserCartComponent } from './user-cart/user-cart.component';
-import { CartProductDetailsComponent } from './cart-product-details/cart-product-details.component'
+import { CartProductDetailsComponent } from './cart-product-details/cart-product-details.component';
+import { UserOrderListComponent } from './user-order-list/user-order-list.component';
+import { AllOrderListComponent } from './all-order-list/all-order-list.component';
+import { OrderProductDetailsComponent } from './order-product-details/order-product-details.component'
 
 
 //we define all the routes in the main page of the application
@@ -52,6 +55,7 @@ const appRoutes: Routes = [
   {path :'admin', component : AdminComponent,children : [
   {path : 'products', component: ProductsComponent}
   ]},
+  {path : 'users/order', component : OrdersComponent},
   {path : 'user/cart', component : UserCartComponent},
   {path : 'admin/all-products', component : ProductListComponent},
   {path : 'admin/edit-product/:id', component : EditProductComponent},
@@ -59,9 +63,12 @@ const appRoutes: Routes = [
   {path : 'admin/users', component: ListUserComponent},
   {path : 'category/Electronics', component: Product1Component},
   {path : 'category/groceries', component : Product2Component},
-  {path : 'category/clothes', component : Product3Component},
+  {path : 'category/Clothes', component : Product3Component},
   {path : 'cart/product-details/:id', component : CartProductDetailsComponent},
-  {path : 'productNotFound', component : ErrorComponent}, //'}
+  {path : 'productNotFound', component : ErrorComponent},
+   //'}
+  {path : 'users/orders', component : UserOrderListComponent},
+  {path : 'admin/orders', component : AllOrderListComponent},
   {path : 'shop', component : ShopComponent, children: [
   {'path' : 'products' , component: ProductsComponent},
   {'path' : 'products/:id', component: ProductsComponent},]},
@@ -98,7 +105,10 @@ const appRoutes: Routes = [
     ListUserComponent,
     EditUserComponent,
     UserCartComponent,
-    CartProductDetailsComponent
+    CartProductDetailsComponent,
+    UserOrderListComponent,
+    AllOrderListComponent,
+    OrderProductDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -16,18 +16,27 @@ const orderSchema = mongoose.Schema({
         required: true,
     },
     customerPhone: {
+        type: Number,
+        required: true,
+    },
+    customerState : {
         type: String,
         required: true,
     },
-    customerLocation : {
-        type: String,
-        required: true,
+    customerCity :{
+        type : String,
+        required : true
+    },
+    customerPinCode : {
+        type : Number,
+        required : true
     },
     products: [{
-        productId: mongoose.Types.ObjectId,
+        productId: String,
         quantity: Number,
         name : String,
-        price: Number
+        price: Number,
+        imageUrl: String
 
     }],
     orderDate : {
@@ -40,8 +49,12 @@ const orderSchema = mongoose.Schema({
         required: true,
     },
     paymentType : {
-        type: String,
+        type: Number,
         required: true
+    },
+    userId : {
+        type : String,
+        required : true
     }
 })
 

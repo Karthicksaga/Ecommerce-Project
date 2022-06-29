@@ -26,8 +26,6 @@
         <td>{{user.phone}}</td>
         <td ><button (click)="ondelete(user._id)" class="btn btn-danger">   <i class="glyphicon glyphicon-trash"></i></button>
         <button (click) = "onEditUserDetails(user._id)" class = "btn btn-warning" style="margin-left: 10px;"><i class="glyphicon glyphicon-pencil"></i></button>
-        <button (click)="onOrderList(user._id)" class = "btn btn-info" style="margin-top: 10px;margin-left: 10px;"> <a href="/MRlogin/dashboard/MRorders/{{user.id}}"> ShowOrders </a> </button>
-        <button  class = "btn btn-info" style="margin-top: 10px;">Track Location </button>
     </td>
     </tr>
 </tbody>

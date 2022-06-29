@@ -1,47 +1,43 @@
-<br><br>
-<br>
 
-<h2 class="boxed">Clothes:-</h2> 
-<div class="col-md-4" *ngFor="let product of Products;let index = index" >
+<div class="col-md-4" *ngFor="let product of products;let index = index" >
  
-<div class="boxed">    
-
-<div class="col-md-2"></div> 
-<div class="row">
-    <div class="col-md-3">
-      
-        <img style="border:1px solid green" src={{ product.imageUrl }} width="250px;" height="300px;"/>
-    </div>
-</div>
+    <div class="boxed">    
     
-
-<div class="col-md-2"></div>
-<div class="row">
-    <div class="col-md-9">
-      
-     <b>  {{product.name}}  </b> 
+    <div class="col-md-2"></div> 
+    <div class="row">
+        <div class="col-md-3">
+          
+            <img style="border:1px solid green" src={{product.imageUrl}} width="250px;" height="300px;"/>
+        </div>
     </div>
-</div>
-  
-
-<div class="col-md-2"></div>
-<div class="row">
-    <div class="col-md-8">
-      
-     <td><font color="red">MRP ₹<del>{{product.price}}</del></font> <font color="#3EA055"> {{product.discount}}% off </font></td>    
+        
+    
+    <div class="col-md-2"></div>
+    <div class="row">
+        <div class="col-md-9">
+          
+         <b>  {{product.name}}  </b> 
+        </div>
     </div>
-</div>
-
-<div class="col-md-2"></div>
-<div class="col-md-2"></div>
-<div class="row">
-    <div class="col-md-3">
-      
-        <td>
-            <button type="button"   class="btn btn-danger" (click)="OnSelectProduct(product.id)"><b>Show Details</b></button><br><br>
-        </td>
+    
+    
+    <div class="col-md-2"></div>
+    <div class="row">
+        <div class="col-md-8">
+         <td><font color="red">₹{{product.price}}</font></td>    
+        </div>
     </div>
-</div>
-
-</div>
-</div> 
+    
+    
+    <div class="col-md-2"></div>
+    <div class="row">
+        <div class="col-md-3">
+          
+            <td>
+                <button type="button"   class="btn btn-danger" (click)="OnSelectProduct(product._id)"><b>Show Details</b></button><br><br>
+            </td>
+        </div>
+    </div>
+    
+    </div>
+    </div> 

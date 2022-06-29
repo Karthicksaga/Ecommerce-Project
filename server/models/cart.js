@@ -8,11 +8,11 @@ const cartSchema = mongoose.Schema({
         required: true
     },
     products: [{
-        productId: mongoose.Types.ObjectId,
+        productId: String,
         quantity: Number,
         name : String,
         price: Number,
-        imageUrl: String,
+        imageUrl: String
 
     }],
     modifiedOn : {

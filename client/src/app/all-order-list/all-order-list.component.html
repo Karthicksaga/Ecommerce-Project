@@ -1,0 +1,40 @@
+<div class = "heading_alignment">
+    <h3>Order List</h3>
+</div>
+
+
+<table class="table table-striped table-bordered">
+
+<thead>
+<tr>
+    <th>Id</th>
+    <th>CustomerName</th>
+    <th>customerAddress</th>
+    <th>customerEmail</th>
+    <th>customerPhone</th>
+    <th>customerState</th>
+    <th>customerCity</th>
+    <th>customerPinCode</th>
+    <th>paymentType</th>
+    <th>totalAmount</th>
+</tr>
+</thead>
+
+<tbody>
+    <tr *ngFor="let order of orderList; let index=index">
+        <td>{{ order._id }}</td>
+        <td>{{order.customerName}}</td>
+        <td>{{order.customerAddress}}</td>
+        <td>{{order.customerEmail}}</td>
+        <td>{{order.customerPhone}}</td>
+        <td>{{order.customerState}}</td>
+        <td>{{order.customerCity}}</td>
+        <td>{{order.customerPinCode}}</td>
+        <td>{{ order.paymentType }}</td>
+        <td> {{ order.totalAmount }}</td>
+    </tr>
+
+
+</tbody>
+
+</table>

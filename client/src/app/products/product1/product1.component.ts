@@ -81,13 +81,25 @@ export class Product1Component implements OnInit {
           timer : 1000,
         })
       }
+    },
+    (error) => {
+      swal.fire({
+        title : "Error",
+        text : "product not found",
+        icon : "error",
+        confirmButtonText : "Back-to-home-Page"
+        
+      }).then((result) => {
+        this.router.navigate(['/home'])
+      })
     })
     
 }
  
 
-OnSelectProduct(id: number) {
-  this.router.navigate(['/product/product_details/'+id])
+OnSelectProduct(id: String) {
+  console.log("Product Id :" + id)
+  this.router.navigate(['product-details/'+id])
 }
 
 }

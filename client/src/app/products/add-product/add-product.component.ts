@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -20,7 +21,8 @@ export class AddProductComponent implements OnInit {
     productData: any;
 
   
-    constructor(private categoryService: CategoryService, private productService: ProductService) { 
+    constructor(private categoryService: CategoryService, 
+      private productService: ProductService, private router : Router) { 
 
     }
     
@@ -44,8 +46,9 @@ export class AddProductComponent implements OnInit {
         swal.fire({
           title: 'Success',
           text:serverResponse['message'],
-          icon : "info"
+          icon : "success"
         })
+        this.router.navigate([''])
     }else{
       swal.fire({
         title: 'Error',

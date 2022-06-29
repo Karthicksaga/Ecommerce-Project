@@ -67,6 +67,15 @@ export class UserCartComponent implements OnInit {
       },
       (error: any) => {
         console.log(error);
+        swal.fire({
+
+        'title' : 'Information',
+        'text' : "Cart Details is Empty Please Purchase the Product",
+        'icon' : "info" ,
+        'confirmButtonText' : 'Go to Home '
+      }).then((result) => {
+        this.router.navigate(['/home']);
+      })
       })
     }else{
       
@@ -85,6 +94,13 @@ export class UserCartComponent implements OnInit {
     localStorage.setItem('quantity', quantity.toString());
     this.router.navigate(['/cart/product-details/' + productId])
 
+  }
+
+  onOrderDetails(){
+
+    localStorage.setItem('totalAmount', this.totalAmount.toString());
+    localStorage.setItem('userId', this.userId.toString());
+    this.router.navigate(['users/order'])
   }
 
 }

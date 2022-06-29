@@ -1,7 +1,7 @@
 <nav class="topnav">
     <a routerLink="/home">Home</a>
     <a routerLink="/category/Electronics">Electronics</a>
-    <a routerLink="/category/Grocery">Grocery</a>
+    <a routerLink="category/groceries">Grocery</a>
     <a routerLink="/category/Clothes">Clothes</a>
     
     <!-- <ng-template [ngIf]="isUserLogged()">
@@ -27,10 +27,10 @@
       <ng-template [ngIf]="userLoginStatus()">
         <a class = "menu-item-right" *ngIf="isCustomerStatus()"routerLink="admin/users">Users</a>
         <a class = "menu-item-right" *ngIf="isCustomerStatus()" routerLink = "admin/all-products">Products</a>
-        <a class = "menu-item-right" *ngIf="isCustomerStatus() "routerLink="/user/order">Orders</a>
+        <a class = "menu-item-right" *ngIf="isCustomerStatus() "routerLink="/admin/orders">Orders</a>
         <a class = "menu-item-right" *ngIf="!isCustomerStatus()"routerLink="/user/profile/mine">My Profile</a>
         <a class = "menu-item-right" *ngIf="!isCustomerStatus()" routerLink = "user/cart">Cart</a>
-        <a class = "menu-item-right" *ngIf="!isCustomerStatus() "routerLink="/user/order">Order</a>
+        <a class = "menu-item-right" *ngIf="!isCustomerStatus() "routerLink="/users/orders">Order</a>
 
       </ng-template>
       

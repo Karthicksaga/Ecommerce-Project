@@ -1,1 +1,102 @@
-<p>orders works!</p>
+
+<div class = "col-md-4"></div>
+<div class = "row">
+    <div class = "col-md-4">
+        <h3> Delivery Information</h3>
+    </div>
+</div>
+
+<div class = "col-md-3"></div>
+
+
+<div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="">Name</label>
+                  <input [(ngModel)]="name" type="text" class="form-control">
+                </div>
+              </div>
+               
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="">Email</label>
+                  <input [(ngModel)]="email" type="email" class="form-control">
+                </div>
+              </div>
+                       
+</div>
+
+
+
+<div class="col-md-3"></div>
+<div class = "row">
+
+    <div class = "col-md-3">
+        <div class = "form-group">
+            <label for = "email">Address</label>
+        <input [(ngModel)]="address" type = "text" id = "address" class = "form-control">
+        </div>
+    </div>
+
+    <div class = "col-md-3">
+        <div class = "form-group">
+            <label for = "state">MobileNo</label>
+            <input [(ngModel)]="phone" type = "text" class = "form-control">
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class = "col-md-3"></div>
+<div class = "row">
+    <div class = "col-md-3">
+        <div class = "form-group">
+            <label for = "customerCity">State</label>
+            <input type = "text" [(ngModel)]="state" class = "form-control">
+        </div>
+    </div>
+
+    <div class = "col-md-3">
+        <div class ="form-group">
+            <label for = 'pinCode'>City</label>
+            <input type = "text" [(ngModel)]="city" class = "form-control">
+        </div>
+    </div>
+</div>
+<div class = "col-md-3">
+</div>
+
+
+
+<div class="row">
+    
+    <div class = "col-md-3">
+        <div class = "form-group">
+            <label for = "pincode"></label>
+            <input type = "text" class = "form-control" [(ngModel)]="pinCode">
+        </div>
+    </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                  <label for="">Payment Mode</label>
+                    <select [(ngModel)]="paymentType"  class="form-control">
+                            <option  [value]= 1 >Cash</option>
+                            <option  [value]= 2 >Cheque</option>
+                            <option  [value]= 3 >UPI</option>
+                    </select>       
+                </div>
+            </div>
+
+  </div>
+            
+<div class="col-md-3"></div>
+
+
+<div class="row">
+    <div class="col-md-3">
+        <button (click)="onConfirmOrder()" class="btn btn-success">Confirm Order</button>
+        <a style="margin-left: 10px;" routerLink="/user/cart" class="btn btn-danger">Cancel</a>
+    </div>
+</div>
