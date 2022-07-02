@@ -5,7 +5,10 @@ const express = require('express');
 require('./util/database');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+//cors is nothing but the cross origin Resource sharing
+const cors = require('cors');
 const app = express();
+//https://stackoverflow.com/questions/5284340/what-is-node-js-connect-express-and-middleware?rq=1
 
 // const adminRoutes = require('./routes/admin');
 // const shopRoutes = require('./routes/shop');
@@ -19,6 +22,10 @@ const userRoutes = require('./routes/userRouter');
 const environmentConstant = require('./util/environment');
 
 app.use(bodyParser.json());
+//https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/
+app.use(cors({
+  origin : '*'
+}))
 app.use(express.static(path.join(__dirname, 'public')));
 
 allowCrossDomain = (req, res, next) => {
@@ -29,6 +36,8 @@ allowCrossDomain = (req, res, next) => {
 }
 
 //middle ware 
+
+// this will enable t access the request from every where from the origin.
 app.use(allowCrossDomain);
 
 // app.use((req, res, next) => {
