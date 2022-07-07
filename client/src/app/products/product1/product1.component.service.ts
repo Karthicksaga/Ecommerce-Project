@@ -5,13 +5,13 @@ import { IPService } from 'src/app/core/services/ip.service';
 @Injectable()
 export class Product1Service {
 
-    //url = 'http://localhost:3000/';
+    url = 'http://localhost:3000/';
 
     constructor(private httpClient: HttpClient, private ipService: IPService) {}
 
     getProducts()  {
-        return this.httpClient.get(this.url)
-      }
+         return this.httpClient.get(this.url)
+    }
 
     getProductsByCategoryId(cId : number){
 
