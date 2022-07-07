@@ -19,7 +19,7 @@ router.get('/allUsers', userController.getAllUsers);
 
 router.get('/logoutAll', userController.logoutAllCustomer);
 
-router.put('/updateCustomerDetails/:id', userController.updateCustomerDetails);
+router.post('/edit-user/:id', userController.updateCustomerDetails);
 
 router.delete('/removeUser/:id', userController.deleteCustomer);
 

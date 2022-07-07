@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {} from '@angular/core';
+import { IPService} from './ip.service'
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -8,26 +9,30 @@ import { HttpClient } from '@angular/common/http';
 
 export class OrderService{
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient, private ipService : IPService){}
 
-    baseUrl = "http://localhost:3000/"
+    //baseUrl = "http://localhost:3000/"
+    
     public confirmOrder(payload:Object){
 
+       const baseUrl = this.ipService.getTargetHost() +'/';
        console.log(JSON.stringify(payload));
-       const postOrderEndPoint = this.baseUrl + 'order/confirmOrder';
+       const postOrderEndPoint = baseUrl + 'order/confirmOrder';
        return this.http.post(postOrderEndPoint,payload);
 
     }
 
     public getAllOrders(){
 
-        const getOrdersEndPoint = this.baseUrl + 'order/getAllOrder';
+        const baseUrl = this.ipService.getTargetHost() +'/';
+        const getOrdersEndPoint = baseUrl + 'order/getAllOrder';
         return this.http.get(getOrdersEndPoint);
     }
 
     public orderByUserId(payload : Object){
 
-        const getOrderByUserId = this.baseUrl + 'order/getUserOrder';
+        const baseUrl = this.ipService.getTargetHost() +'/';
+        const getOrderByUserId = baseUrl + 'order/getUserOrder';
         return this.http.post(getOrderByUserId, payload);
     }
     

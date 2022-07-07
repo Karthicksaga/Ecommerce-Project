@@ -48,7 +48,7 @@ export class AddProductComponent implements OnInit {
           text:serverResponse['message'],
           icon : "success"
         })
-        this.router.navigate([''])
+        this.router.navigate(['admin/add-product'])
     }else{
       swal.fire({
         title: 'Error',

@@ -68,9 +68,9 @@ export class ProductListComponent implements OnInit {
         swal.fire({
           title: 'Success',
           text:serverResponse['message'],
-          icon : "success",
-          timer : 2000
+          icon : "success"
         })
+        this.router.navigate(['/admin/all-products'])
       }else{
         swal.fire({
           title: 'Error',

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../core/services/order.service'
 import { Router } from '@angular/router';
 import swal from '\sweetalert2'
+import { ServerResponse } from '../core/model/serverResponse.model';
 
 @Component({
   selector: 'app-all-order-list',
@@ -23,6 +24,53 @@ export class AllOrderListComponent implements OnInit {
     this.getUsersOrder();
   }
 
+  
+
+  getAllOrders(){
+
+    swal.fire({
+      title: 'Fetching orders...',
+  });
+  swal.showLoading();
+
+  this.orderService.getAllOrders().subscribe((response) => {
+
+    swal.close();
+    const serverResponse = response['response'];
+    if(serverResponse['success'] === true){
+      
+      this.orderList = serverResponse['data'];
+      console.log("Order List : " + this.orderList);
+      swal.fire({
+        title: 'Success',
+        text:serverResponse['message'],
+        icon : "success",
+        timer : 1000
+
+      })
+    }else{
+
+      swal.fire({
+
+        title: 'warning',
+        text : ServerResponse['message'],
+        icon : 'error',
+      })
+    }
+    
+  }, (error) => {
+
+    swal.fire({
+      title : 'error',
+      text : ServerResponse['message'],
+      icon : 'error',
+      confirmButtonText : 'no order found'
+    }).then(response => {
+      
+      this.router.navigate(['/home'])
+    })
+  })
+  }
 
   getUsersOrder(){
 
@@ -64,7 +112,7 @@ export class AllOrderListComponent implements OnInit {
         confirmButtonText : 'No Orders Found'
       }).then((result) => {
         console.log(result);
-        this.router.navigate['/home']
+        this.router.navigate(['/home'])
       })
     })
   }

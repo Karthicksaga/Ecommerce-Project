@@ -262,7 +262,9 @@ exports.logoutAllCustomer = async(req, res) => {
 exports.updateCustomerDetails = async (req, res, next) => {
 
     const requestBody = req.body;
-    const userId = mongoose.Types.ObjectId(params.userId);
+    const userId = mongoose.Types.ObjectId(req.params.id);
+
+    console.log("UserId : " + userId);
 
     if(requestBody != null && userId != null){
 
@@ -273,42 +275,65 @@ exports.updateCustomerDetails = async (req, res, next) => {
             const email = requestBody.email;
 
             if(name != null && fname != null &&
-                lname != null && phone != null && email != null && password != null){
-                    const existing = await User.findById({
-                        _id: userId
-                    });
-                    if(user != null){
+                lname != null && phone != null && email != null ){
+                   
+                    try{
+                        const existingUser = await User.findById({
+                            _id: id
+                        });
+                        if(existingUser != null){
+    
+                            const updateUserDetails = {
+                                name: name,
+                                fname : fname,
+                                lname : lname,
+                                phone : phone,
+                                email : email
+                            }
 
-                        const updateUserDetails = {
-                            name: name,
-                            fname : fname,
-                            lname : lname,
-                            phone : phone,
-                            email : email
-                        }
-                        try{
-                            const updateUserDetails = await User.updateOne({
-                                _id: userId
-                            },updateUserDetails);
-
-                            res.status(200).json({
-
-                                response : {
-                                    success: true,
-                                    message : "User Details Updated Successfully",
-                                    data : updateUserDetails
-                                }
-                            })
-                        }catch(err) {
-                            res.status(500).json({
+                            console.log("Updated User  :" + updateUserDetails);
+                            try{
+                                const updateUserDetails = await User.updateOne({
+                                    _id: id
+                                },updateUserDetails);
+    
+                                res.status(200).json({
+    
+                                    response : {
+                                        success: true,
+                                        message : "User Details Updated Successfully",
+                                        data : updateUserDetails
+                                    }
+                                })
+                            }catch(err) {
+                                res.status(500).json({
+                                    response : {
+                                        success: false,
+                                        message : "Internal Server Error",
+                                        data : null
+                                    }
+                                })
+                            }
+                        }else{
+                            res.status(404).json({
                                 response : {
                                     success: false,
-                                    message : "Internal Server Error",
+                                    message : "user not found",
                                     data : null
                                 }
                             })
                         }
+                    }catch(err){
+
+                        res.status(500).json({
+                            response : {
+                                success: false,
+                                message : "user not found",
+                                data : null
+                            }
+                        })
                     }
+                    
             }else{
                     res.status(400).json({
                         response : {
@@ -324,7 +349,7 @@ exports.updateCustomerDetails = async (req, res, next) => {
             response : {
                 data : null,
                 success: false,
-                message: 'Internal Server Error'
+                message: 'Request body is Empty'
             }
         })
     }

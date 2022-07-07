@@ -24,7 +24,7 @@
         <td>{{user.lname}}</td>
         <td>{{user.email}}</td>
         <td>{{user.phone}}</td>
-        <td ><button (click)="ondelete(user._id)" class="btn btn-danger">   <i class="glyphicon glyphicon-trash"></i></button>
+        <td ><button (click)="onDeleteUser(user._id)" class="btn btn-danger">   <i class="glyphicon glyphicon-trash"></i></button>
         <button (click) = "onEditUserDetails(user._id)" class = "btn btn-warning" style="margin-left: 10px;"><i class="glyphicon glyphicon-pencil"></i></button>
     </td>
     </tr>

@@ -1,22 +1,25 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { IPService } from './ip.service';
+
 @Injectable({
     providedIn: "root"
 })
 
 export class CartService{
 
-    baseUrl = "http://localhost:3000/cart/";
+    //baseUrl = "http://localhost:3000/cart/";
     cartAddUrl;
     cartGetUrl;
-    constructor(private httpClient: HttpClient){
+    constructor(private httpClient: HttpClient, private ipService : IPService){
 
     }
 
     public addProductIntoCart(payload : Object){
 
+        const baseUrl = this.ipService.getTargetHost()+ '/cart/'
         console.log(payload);
-        this.cartAddUrl = this.baseUrl + 'add_cart';
+        this.cartAddUrl = baseUrl + 'add_cart';
         console.log("Add to Cart Data is Called ");
         return this.httpClient.post(this.cartAddUrl,payload);
     }
@@ -24,7 +27,8 @@ export class CartService{
     public updateCartDetails(payload : Object){
 
         console.log(payload);
-        const cartUpdateUrl = this.baseUrl + 'update_cart';
+        const baseUrl = this.ipService.getTargetHost()+ '/cart/'
+        const cartUpdateUrl = baseUrl + 'update_cart';
         return this.httpClient.post(cartUpdateUrl, payload);
     }
     // public getCartDetails(payload: any)
@@ -37,7 +41,8 @@ export class CartService{
     public getCartDetails(payload : any){
         console.log("Get Cart Details Function Called ....\n");
         console.log(payload);
-        this.cartGetUrl = this.baseUrl + 'get-cart'
+        const baseUrl = this.ipService.getTargetHost()+ '/cart/'
+        this.cartGetUrl = baseUrl + 'get-cart'
         return this.httpClient.post(this.cartGetUrl, payload);
     }
 }

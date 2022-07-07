@@ -13,6 +13,7 @@ const app = express();
 // const adminRoutes = require('./routes/admin');
 // const shopRoutes = require('./routes/shop');
 
+
 const categoryRoutes = require('./routes/categoryRouter');
 const productsRoutes = require('./routes/productRouter');
 const cartRoutes = require('./routes/cartRouter');
@@ -20,12 +21,15 @@ const orderRoutes = require('./routes/orderRoutes');
 const userRoutes = require('./routes/userRouter');
 
 const environmentConstant = require('./util/environment');
+const { constants } = require('perf_hooks');
 
 app.use(bodyParser.json());
 //https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/
-app.use(cors({
-  origin : '*'
-}))
+// app.use(cors({
+//   origin : '*'
+// }))
+app.use(cors());
+console.log("hi")
 app.use(express.static(path.join(__dirname, 'public')));
 
 allowCrossDomain = (req, res, next) => {
@@ -55,7 +59,7 @@ app.use('/api/category', categoryRoutes);
 
 app.use('/product', productsRoutes);
 
-app.use('/cart', cartRoutes)
+app.use('/cart', cartRoutes);
 
 app.use('/order', orderRoutes);
 //app.use('/admin', adminRoutes);

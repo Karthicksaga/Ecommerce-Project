@@ -51,6 +51,16 @@ export class Product1Component implements OnInit {
           timer : 2000
         })
       }
+    },(error : any) => {
+      swal.fire({
+        title : "Error",
+        text : "product not found",
+        icon : "error",
+        confirmButtonText : "Back-to-home-Page"
+        
+      }).then((result) => {
+        this.router.navigate(['/home'])
+      })
     }
     )
   }

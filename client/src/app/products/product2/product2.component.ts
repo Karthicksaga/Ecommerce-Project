@@ -84,7 +84,6 @@ export class Product2Component implements OnInit {
           })
         }
       }else{
-        alert(serverResponse['message']);
         swal.fire({
           title: 'Error',
           text:response['message'],

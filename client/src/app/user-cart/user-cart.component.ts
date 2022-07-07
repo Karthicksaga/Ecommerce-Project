@@ -92,6 +92,7 @@ export class UserCartComponent implements OnInit {
   onEdit(productId:string, quantity:number){
 
     localStorage.setItem('quantity', quantity.toString());
+    console.log("Product Id :" + productId );
     this.router.navigate(['/cart/product-details/' + productId])
 
   }

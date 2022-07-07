@@ -290,46 +290,101 @@ exports.getAllProducts = async(req,res,next) => {
         
     }
 
+     //delete product by producId 
+    exports.deleteProduct = async(req, res, next) => {
 
-    //delete product by id
-
-    exports.deleteProduct = async(req,res,next) => {
+        //get the requestparmas
         const productId = req.params.productId;
-        
-        console.log("delete Product Function called");
-        if(productId != null){
+
+        console.log("Product Id  : " + productId);
+        if(productId !== undefined && productId !== null){
 
             try{
-                const deletedProduct = await Product.deleteOne({
-                    _id: productId
-                });
-                console.log(deletedProduct);
-                res.status(204).json({
-                    response: {
-                        success: true,
-                        message: "Product deleted successfully",
-                        data: deletedProduct
-                    }
+
+                const deletedProductStatus = await Product.deleteOne({
+                    _id : productId
                 })
-            }catch(err){
+
+                if(deletedProductStatus !== null && deletedProductStatus['deletedCount'] !== 0){
+
+                    res.status(200).json({
+                        response : {
+                            "message" : "Product deleted Successfully",
+                            success : true,
+                            data  : deletedProductStatus
+                        }
+                    })
+                }else{
+
+                    res.status(404).json({
+                        response : {
+                            "message" : "Product not found",
+                            success : false,
+                            data  : null
+                        }
+                    })
+                }
+            }catch{
+
                 res.status(500).json({
-                    response: {
-                        success: false,
-                        message: "Internal Server Error",
-                        data: null
+                    response : {
+                        "message" : "Internal Server Error",
+                        success : false,
+                        data  : null
                     }
                 })
             }
         }else{
-            res.status(400).json({
-                response: {
-                    success: false,
-                    message: "Bad Request",
-                    data: null
+
+            res.status(404).json({
+                response : {
+
+                    'message' : 'param id is null', 
+                    success : false,
+                    data : null
                 }
             })
         }
     }
+    //delete product by id
+
+    // exports.deleteProduct = async(req,res,next) => {
+    //     const productId = req.params.productId;
+        
+    //     console.log("delete Product Function called");
+    //     if(productId != null){
+
+    //         try{
+    //             const deletedProduct = await Product.deleteOne({
+    //                 _id: productId
+    //             });
+    //             console.log(deletedProduct);
+    //             res.status(204).json({
+    //                 response: {
+    //                     success: true,
+    //                     message: "Product deleted successfully",
+    //                     data: deletedProduct
+    //                 }
+    //             })
+    //         }catch(err){
+    //             res.status(500).json({
+    //                 response: {
+    //                     success: false,
+    //                     message: "Internal Server Error",
+    //                     data: null
+    //                 }
+    //             })
+    //         }
+    //     }else{
+    //         res.status(400).json({
+    //             response: {
+    //                 success: false,
+    //                 message: "Bad Request",
+    //                 data: null
+    //             }
+    //         })
+    //     }
+    // }
     //create a database 
     exports.createTestProduct = async(req,res,next) => {
         const product = new Product({
